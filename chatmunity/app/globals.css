@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+@font-face {
+  font-family: 'LOTTERIACHAB';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/LOTTERIACHAB.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+#main-nav {
+  border: 1px solid black;
+  height: 70px;
+  width: 100%;
+  display: flex;
+  padding: 10px;
+}
+
+.nav-menu {
+  height: 100%;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+}
+
+.logo {
+  font-family: 'LOTTERIACHAB', 'Courier New', Courier, monospace;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  color: rgb(96, 255, 229);
+  margin-right: 30px;
+}
+
+.search-menu {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  height: 100%;
+  font-size: 26px;
+  border: 1px solid black;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+.search-input {
+  border: none;
+  height: 60%;
+  font-size: 20px;
+}
+
+.search-input:focus-visible {
+  outline: none;
+}
