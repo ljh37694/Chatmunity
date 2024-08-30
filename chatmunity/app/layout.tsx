@@ -3,13 +3,20 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { config } from '@fortawesome/fontawesome-svg-core';
+import { faHome, faMagnifyingGlass, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { config, IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 
 config.autoAddCss = false;
 
 const inter = Inter({ subsets: ["latin"] });
+
+interface NavMenu {
+  url: string,
+  icon: IconDefinition,
+}
+
+const navMenuList: NavMenu[] = [{ url: "/main", icon: faHome }, { url: '/write', icon: faPlus }];
 
 export const metadata: Metadata = {
   title: "Chatmunity",
@@ -35,9 +42,13 @@ export default function RootLayout({
           </section>
 
           <section className="nav-menu">
-            <Link href='/main'>
-              <FontAwesomeIcon icon={faHome} />
-            </Link>
+            {navMenuList.map((item, idx) => {
+              return (
+                <Link href={item.url} key={idx}>
+                  <FontAwesomeIcon icon={item.icon} />
+                </Link>
+              );
+            })}
           </section>
         </nav>
 
