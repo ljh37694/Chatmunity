@@ -26,6 +26,8 @@ a {
 
 #main-nav {
   border: 1px solid black;
+  border-left: none;
+  border-right: none;
   height: 70px;
   width: 100%;
   display: flex;
@@ -35,16 +37,15 @@ a {
 
 .nav-menu {
   height: 100%;
-  width: 50px;
   display: flex;
   align-items: center;
   justify-content: right;
   color: black;
-  font-size: 26px;
   color: rgb(114, 114, 114);
   padding: 10px;
 
   & a {
+    font-size: 26px;
     padding: 0 10px;
   }
 }
