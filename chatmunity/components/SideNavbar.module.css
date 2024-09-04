@@ -1,0 +1,36 @@
+#navbar {
+  position: absolute;
+  left: 0;
+  top: 70px;
+  border-right: 1px solid black;
+  padding: 20px;
+  height: calc(100% - 70px);
+  width: 240px;
+}
+
+.menuContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  font-size: 20px;
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 8px;
+
+  & p {
+    margin-left: 10px;
+  }
+}
+
+.menu:hover {
+  background-color: #eee;
+}
+
+.activeMenu {
+  background-color: rgb(217, 226, 225);
+}
