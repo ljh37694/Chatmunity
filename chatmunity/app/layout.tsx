@@ -1,22 +1,14 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faMagnifyingGlass, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { config, IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
+import TopNavbar from "@/components/Topnavbar";
+import SideNavbar from "@/components/SideNavbar";
 
 config.autoAddCss = false;
 
 const inter = Inter({ subsets: ["latin"] });
-
-interface NavMenu {
-  url: string,
-  icon: IconDefinition,
-}
-
-const navMenuList: NavMenu[] = [{ url: "/main", icon: faHome }, { url: '/write', icon: faPlus }];
 
 export const metadata: Metadata = {
   title: "Chatmunity",
@@ -31,26 +23,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <nav id="main-nav">
-          <section className="logo">
-            <label>CM</label>
-          </section>
-
-          <section className="search-menu">
-            <label><FontAwesomeIcon icon={faMagnifyingGlass} /></label>
-            <input className="search-input" />
-          </section>
-
-          <section className="nav-menu">
-            {navMenuList.map((item, idx) => {
-              return (
-                <Link href={item.url} key={idx}>
-                  <FontAwesomeIcon icon={item.icon} />
-                </Link>
-              );
-            })}
-          </section>
-        </nav>
+        <TopNavbar />
+        <SideNavbar />
 
         {children}
       </body>
