@@ -1,0 +1,59 @@
+#panel {
+  position: absolute;
+  top: 70px;
+  right: 0;
+  width: 240px;
+  height: calc(100% - 70px);
+  border-left: 1px solid black;
+  padding: 10px;
+}
+
+.title {
+  text-align: center;
+  font-size: 28px;
+  margin: 20px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.friend {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+
+  &>p {
+    font-size: 24px;
+    color: black;
+    margin-left: 15px;
+  }
+}
+
+.friend:hover {
+  background-color: #eee;
+  border-radius: 8px;
+}
+
+.profile {
+  height: 45px;
+  width: 45px;
+  position: relative;
+
+  & img {
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+  }
+}
+
+.status {
+  color: #ff0000;
+  border: 2px solid rgb(78, 78, 78);
+  border-radius: 100px;
+  position: absolute;
+  right: 3px;
+  bottom: 0px;
+  font-size: 14px;
+}

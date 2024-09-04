@@ -5,6 +5,7 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import TopNavbar from "@/components/Topnavbar";
 import SideNavbar from "@/components/SideNavbar";
+import FriendsPanel from "@/components/FriendsPanel";
 
 config.autoAddCss = false;
 
@@ -25,6 +26,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <TopNavbar />
         <SideNavbar />
+        <FriendsPanel />
 
         {children}
       </body>
