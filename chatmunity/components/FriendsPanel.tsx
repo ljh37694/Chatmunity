@@ -13,7 +13,15 @@ export default function FriendsPanel() {
   const profileList: Profile[] = [
     { name: 'Lee', img: imgUrl },
     { name: 'Kai', img: imgUrl },
-  ]
+    { name: 'Lee', img: imgUrl },
+    { name: 'Kai', img: imgUrl },
+    { name: 'Lee', img: imgUrl },
+    { name: 'Kai', img: imgUrl },
+    { name: 'Lee', img: imgUrl },
+    { name: 'Kai', img: imgUrl },
+    { name: 'Lee', img: imgUrl },
+    { name: 'Kai', img: imgUrl },
+  ];
   
   return (
     <div id={styles.panel}>

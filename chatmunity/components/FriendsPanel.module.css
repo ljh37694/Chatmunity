@@ -5,18 +5,24 @@
   width: 240px;
   height: calc(100% - 70px);
   border-left: 1px solid black;
-  padding: 10px;
+  padding: 0 10px;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
   text-align: center;
   font-size: 28px;
   margin: 20px;
+  height: 5%;
 }
 
 .content {
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
+  flex-grow: 1;
 }
 
 .friend {
@@ -56,4 +62,25 @@
   right: 3px;
   bottom: 0px;
   font-size: 14px;
+}
+
+/* Chrome, Whale, Edge */
+
+/* 스크롤바 전체 기본 꾸미기 */
+.content::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* 스크롤바 막대 꾸미기 */
+.content::-webkit-scrollbar-thumb {
+  background: inherit;
+  border-radius: 10px;
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+  background: #b1b1b1;
+}
+
+/* 스크롤바 트랙 꾸미기 */
+.content::-webkit-scrollbar-track {
 }
