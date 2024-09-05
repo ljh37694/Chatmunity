@@ -21,16 +21,13 @@
   width: 100%;
   padding: 10px 20px;
   border-radius: 8px;
+  margin: 2px 0;
 
   & p {
     margin-left: 10px;
   }
 }
 
-.menu:hover {
-  background-color: #eee;
-}
-
-.activeMenu {
+.menu:hover, .activeMenu {
   background-color: rgb(217, 226, 225);
 }
