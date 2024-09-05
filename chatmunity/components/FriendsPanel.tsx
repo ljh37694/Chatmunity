@@ -1,6 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './FriendsPanel.module.css';
-import { faCircle } from '@fortawesome/free-solid-svg-icons';
 
 export default function FriendsPanel() {
   const imgUrl = 'https://mblogthumb-phinf.pstatic.net/20160817_259/retspe_14714118890125sC2j_PNG/%C7%C7%C4%AB%C3%F2_%281%29.png?type=w800';
@@ -32,7 +30,7 @@ export default function FriendsPanel() {
             <label className={styles.friend} key={idx}>
               <div className={styles.profile}>
                 <img src={item.img} />
-                <FontAwesomeIcon className={styles.status} icon={faCircle} />
+                <div className={`${styles.statusCircle} ${styles.online}`}></div>
               </div>
               
               <p>{item.name}</p>

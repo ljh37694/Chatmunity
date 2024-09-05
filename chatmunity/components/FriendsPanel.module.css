@@ -54,14 +54,21 @@
   }
 }
 
-.status {
-  color: #ff0000;
+.statusCircle {
+  color: rgb(109, 109, 109);
+  width: 15px;
+  height: 15px;
+  background-color: rgb(203, 203, 203);
   border: 2px solid rgb(78, 78, 78);
   border-radius: 100px;
   position: absolute;
   right: 3px;
   bottom: 0px;
   font-size: 14px;
+}
+
+.online {
+  background-color: rgb(94, 250, 94);
 }
 
 /* Chrome, Whale, Edge */
@@ -79,8 +86,4 @@
 
 .content::-webkit-scrollbar-thumb:hover {
   background: #b1b1b1;
-}
-
-/* 스크롤바 트랙 꾸미기 */
-.content::-webkit-scrollbar-track {
 }
