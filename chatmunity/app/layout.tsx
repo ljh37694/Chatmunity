@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-import TopNavbar from "@/components/Topnavbar";
+import TopNavbar from "@/components/TopNavbar";
 import SideNavbar from "@/components/SideNavbar";
 import FriendsPanel from "@/components/FriendsPanel";
 
