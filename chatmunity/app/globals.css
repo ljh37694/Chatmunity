@@ -23,3 +23,11 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+#main-panel {
+  position: absolute;
+  top: 70px;
+  left: 240px;
+  width: calc(100% - 480px);
+  height: calc(100% - 70px);
+}

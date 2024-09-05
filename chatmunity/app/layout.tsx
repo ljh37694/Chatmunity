@@ -27,8 +27,9 @@ export default function RootLayout({
         <TopNavbar />
         <SideNavbar />
         <FriendsPanel />
-
-        {children}
+        <main id="main-panel">
+          {children}
+        </main>
       </body>
     </html>
   );
