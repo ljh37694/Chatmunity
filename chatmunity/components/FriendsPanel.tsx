@@ -1,12 +1,13 @@
+import Friend from './Friend';
 import styles from './FriendsPanel.module.css';
+
+export interface Profile {
+  name: string,
+  img: string,
+}
 
 export default function FriendsPanel() {
   const imgUrl = 'https://mblogthumb-phinf.pstatic.net/20160817_259/retspe_14714118890125sC2j_PNG/%C7%C7%C4%AB%C3%F2_%281%29.png?type=w800';
-
-  interface Profile {
-    name: string,
-    img: string,
-  }
 
   const profileList: Profile[] = [
     { name: 'Lee', img: imgUrl },
@@ -27,14 +28,7 @@ export default function FriendsPanel() {
       <section className={styles.content}>
         {profileList.map((item, idx) => {
           return (
-            <label className={styles.friend} key={idx}>
-              <div className={styles.profile}>
-                <img src={item.img} />
-                <div className={`${styles.statusCircle} ${styles.online}`}></div>
-              </div>
-              
-              <p>{item.name}</p>
-            </label>
+            <Friend data={item} key={idx} />
           );
         })}
       </section>

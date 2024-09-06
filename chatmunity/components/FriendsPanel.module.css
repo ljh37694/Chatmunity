@@ -71,6 +71,14 @@
   background-color: rgb(94, 250, 94);
 }
 
+.offline {
+  background-color: #fff;
+}
+
+.away {
+  background-color: rgb(255, 158, 13);
+}
+
 /* Chrome, Whale, Edge */
 
 /* 스크롤바 전체 기본 꾸미기 */
