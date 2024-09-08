@@ -1,0 +1,65 @@
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.topNav {
+  text-align: center;
+  font-size: 30px;
+  width: 100%;
+  background-color: #3f3f3ff4;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.postContainer {
+  width: 100%;
+  overflow-y: scroll;
+  margin: auto;
+}
+
+.postContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.post {
+  margin: 10px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+
+  & p {
+    background-color: #eee;
+    padding: 10px;
+    height: 100%;
+    display: inline-block;
+    border-radius: 10px;
+    max-width: 60%;
+
+  }
+}
+
+.hotPost {
+  justify-content: left;
+
+  & p {
+    background-color: rgb(39, 255, 223);
+  }
+}
+
+.searchBtn {
+  font-size: 24px;
+}
+
+.box {
+  width: 20%;
+}
+
+.title {
+  flex-grow: 1;
+}
