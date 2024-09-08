@@ -32,7 +32,7 @@
   margin-right: 30px;
   user-select: none;
 
-  & label {
+  & a {
     font-family: 'LOTTERIACHAB';
   }
 }

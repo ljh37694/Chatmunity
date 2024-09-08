@@ -15,7 +15,7 @@ export default function TopNavbar() {
   return (
     <nav id={styles.navbar}>
       <section className={styles.logo}>
-        <label>CM</label>
+        <Link href='/'>CM</Link>
       </section>
 
       <section className={styles["search-container"]}>
