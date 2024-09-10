@@ -26,23 +26,22 @@
   display: flex;
   align-items: center;
   justify-content: right;
+}
 
-  & p {
-    background-color: #eee;
-    padding: 10px;
-    height: 100%;
-    display: inline-block;
-    border-radius: 10px;
-    max-width: 60%;
-
-  }
+.content {
+  background-color: #eee;
+  padding: 10px;
+  height: 100%;
+  display: inline-block;
+  border-radius: 10px;
+  max-width: 60%;
 }
 
 .hotPost {
   justify-content: left;
 
-  & p {
-    background-color: rgb(39, 255, 223);
+  & > * {
+    background-color: aqua;
   }
 }
 

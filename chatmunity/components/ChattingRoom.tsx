@@ -1,6 +1,7 @@
 import styles from './ChattingRoom.module.css';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Link from 'next/link';
 
 export interface Chat {
   content: string,
@@ -30,7 +31,9 @@ export default function ChattingRoom(props: Props) {
         {chatList.map((item, idx) => {
           return (
             <div className={`${styles.post} ${idx % 2 === 0? styles.hotPost : ''}`} key={idx}>
-              <p>{item.content}</p>
+              {
+                item.url ? <Link className={styles.content} href={item.url}>{item.content}</Link> : <p className={styles.content}>{item.content}</p>
+              }
             </div>
           );
         })}
