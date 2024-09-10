@@ -1,16 +1,18 @@
-'use client'
-
-import { useState } from 'react';
 import styles from './ChattingRoom.module.css';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-interface Chat {
+export interface Chat {
   content: string,
+  url?: string,
 }
 
-export default function ChattingRoom() {
-  const [chatList, setChatList] = useState<Chat[]>([]);
+interface Props {
+  chatList: Chat[],
+}
+
+export default function ChattingRoom(props: Props) {
+  const chatList = props.chatList;
 
   return (
     <>
