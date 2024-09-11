@@ -1,7 +1,9 @@
+import { ObjectId } from 'mongodb';
 import styles from './page.module.css';
 import { Chat } from '@/components/ChattingRoom';
 
 export interface Post {
+  _id?: ObjectId,
   title: string,
   content: string,
 }
