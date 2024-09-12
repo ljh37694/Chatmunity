@@ -1,5 +1,5 @@
-import { Post } from "@/app/post/[id]/page";
 import { connectDB } from "@/app/utils/datadbase";
+import { Post } from "@/types";
 import { Db, InsertOneResult, MongoClient } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -18,6 +18,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const result: InsertOneResult = await db.collection<Post>('post').insertOne({
           title: req.body.title,
           content: req.body.content,
+          likes: 0,
+          views: 0,
         });
       
         res.status(200).json(result);

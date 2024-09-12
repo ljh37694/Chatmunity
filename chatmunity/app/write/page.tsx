@@ -5,10 +5,13 @@ import styles from './page.module.css';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { FormEvent, useRef } from 'react';
 import { Post } from '@/types';
+import { useRouter } from 'next/navigation';
 
 export default function Write() {
   const titleRef = useRef<HTMLInputElement>(null);
   const contentRef = useRef<HTMLTextAreaElement>(null);
+
+  const router = useRouter();
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -21,11 +24,15 @@ export default function Write() {
       const post: Post = {
         title: titleRef.current!.value,
         content: contentRef.current!.value,
+        likes: 0,
+        views: 0,
       };
   
       axios.post('/api/write', post)
         .then((res: AxiosResponse) => {
           console.log(res.data);
+
+          router.push('/main');
         })
         .catch((e: AxiosError) => {
           console.log(e);

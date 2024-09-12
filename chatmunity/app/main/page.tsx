@@ -12,7 +12,6 @@ export default async function Main() {
   const postList: Chat[] = result.map((item, idx): Chat => {
     return {
       content: item.title,
-      url: `/post/${idx}`,
     }
   });
 

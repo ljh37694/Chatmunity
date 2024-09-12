@@ -14,7 +14,7 @@
 .postContainer {
   width: 100%;
   overflow-y: scroll;
-  margin: auto;
+  margin: 0 auto;
 }
 
 .postContainer::-webkit-scrollbar {
