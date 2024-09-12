@@ -1,12 +1,8 @@
+import { Chat } from '@/types';
 import styles from './ChattingRoom.module.css';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
-
-export interface Chat {
-  content: string,
-  url?: string,
-}
 
 interface Props {
   chatList: Chat[],

@@ -1,18 +1,11 @@
-import { ObjectId } from 'mongodb';
+import { Post } from '@/types';
 import styles from './page.module.css';
-import { Chat } from '@/components/ChattingRoom';
-
-export interface Post {
-  _id?: ObjectId,
-  title: string,
-  content: string,
-}
 
 interface Props {
   post: Post,
 }
 
-export default function Post(props: Props) {
+export default function PostDetail(props: Props) {
   return (
     <div>
       <h3>제목</h3>

@@ -1,16 +1,20 @@
 import styles from './page.module.css';
 import ChattingRoom from '@/components/ChattingRoom';
-import { Chat } from '@/components/ChattingRoom';
+import { connectDB } from '../utils/datadbase';
+import { Chat, Post } from '@/types';
 
-export default function Main() {
-  const postList: Chat[] = Array<Chat>(100);
+export default async function Main() {
+  const client = await connectDB;
+  const db = client.db('Chatmunity');
 
-  postList.fill(
-    { 
-      content: "내용",
-      url: '/post/1'
-    },
-  );
+  const result = await db.collection<Post>('post').find().toArray();
+
+  const postList: Chat[] = result.map((item, idx): Chat => {
+    return {
+      content: item.title,
+      url: `/post/${idx}`,
+    }
+  });
 
   return (
     <div className={styles.container}>

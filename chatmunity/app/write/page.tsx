@@ -3,8 +3,8 @@
 import Button from '@/components/Button';
 import styles from './page.module.css';
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { Post } from '../post/[id]/page';
 import { FormEvent, useRef } from 'react';
+import { Post } from '@/types';
 
 export default function Write() {
   const titleRef = useRef<HTMLInputElement>(null);
