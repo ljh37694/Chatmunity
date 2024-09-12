@@ -11,12 +11,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log(req.body.title);
 
     if (req.method === 'POST') { 
-      const result: InsertOneResult = await db.collection<Post>('post').insertOne({
-        title: req.body.title,
-        content: req.body.content,
-      });
-    
-      res.status(200).json(result);
+      const { title, content } = req.body;
+      if (!title || !content) {
+        res.status(400).json({message: '제목 또는 내용이 빈칸입니다'});
+      } else {
+        const result: InsertOneResult = await db.collection<Post>('post').insertOne({
+          title: req.body.title,
+          content: req.body.content,
+        });
+      
+        res.status(200).json(result);
+      }
     }
   } catch (e) {
     res.status(500).json(e);
