@@ -33,6 +33,7 @@ export default function Write() {
           console.log(res.data);
 
           router.push('/main');
+          router.refresh();
         })
         .catch((e: AxiosError) => {
           console.log(e);

@@ -17,7 +17,9 @@ export default async function Main() {
 
   return (
     <div className={styles.container}>
-      <ChattingRoom chatList={postList} />
+      <div className={styles.postContainer}>
+        <ChattingRoom chatList={postList} />
+      </div>
     </div>
   );
 }
