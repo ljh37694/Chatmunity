@@ -1,0 +1,21 @@
+.container {
+  width: 700px;
+  min-width: 350px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.commentContainer {
+  width: 700px;
+}
+
+.title {
+  font-size: 36px;
+  margin-bottom: 1em;
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+}
+
+.content {
+  margin-bottom: 2em;
+}

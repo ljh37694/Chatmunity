@@ -2,7 +2,7 @@ import styles from './Button.module.css';
 
 interface Props {
   text: string,
-  className: string,
+  className?: string,
   [key: string]: any,
 }
 
