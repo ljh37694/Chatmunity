@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 interface Props {
   chatList: Chat[],
-  href?: string,
+  isPost?: boolean,
 }
 
 export default function ChattingRoom(props: Props) {
@@ -29,7 +29,7 @@ export default function ChattingRoom(props: Props) {
           return (
             <div className={`${styles.post} ${idx % 2 === 0? styles.hotPost : ''}`} key={idx}>
               {
-                props.href ? <Link className={styles.content} href={`/write/${idx}`}>{item.content}</Link> : <p className={styles.content}>{item.content}</p>
+                props.isPost ? <Link className={styles.content} href={`/post/${idx}`}>{item.content}</Link> : <p className={styles.content}>{item.content}</p>
               }
             </div>
           );
