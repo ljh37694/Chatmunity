@@ -1,6 +1,6 @@
 'use client'
 
-import Button from '@/components/Button';
+import Button from '@/components/common/Button';
 import styles from './page.module.css';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { FormEvent, useRef } from 'react';
