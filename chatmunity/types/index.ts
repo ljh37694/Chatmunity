@@ -12,3 +12,8 @@ export interface Post extends Chat {
   views: number,
   likes: number,
 }
+
+export interface Profile {
+  name: string,
+  img: string,
+}

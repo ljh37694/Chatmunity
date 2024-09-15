@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react';
-import { Profile } from './FriendsPanel';
-import styles from './FriendsPanel.module.css';
+import { Profile } from '@/types';
+import styles from '@/styles/layout/FriendsPanel.module.css';
 
 export default function Friend(props: { data: Profile }) {
   const { img, name } = props.data;

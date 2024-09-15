@@ -1,7 +1,7 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { faHome, faMagnifyingGlass, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from './TopNavbar.module.css';
+import styles from '@/styles/layout/TopNavbar.module.css';
 import Link from "next/link";
 
 export default function TopNavbar() {

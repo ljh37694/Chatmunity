@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Button from './Button';
-import styles from './Comments.module.css';
+import styles from '@/styles/common/Comments.module.css';
 import { Chat } from '@/types';
 
 export default function Comments() {

@@ -1,10 +1,6 @@
-import Friend from './Friend';
-import styles from './FriendsPanel.module.css';
-
-export interface Profile {
-  name: string,
-  img: string,
-}
+import Friend from '../ui/Friend';
+import styles from '@/styles/layout/FriendsPanel.module.css';
+import { Profile } from '@/types';
 
 export default function FriendsPanel() {
   const imgUrl = 'https://mblogthumb-phinf.pstatic.net/20160817_259/retspe_14714118890125sC2j_PNG/%C7%C7%C4%AB%C3%F2_%281%29.png?type=w800';

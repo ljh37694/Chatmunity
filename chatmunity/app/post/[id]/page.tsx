@@ -1,6 +1,6 @@
 import { Post } from '@/types';
 import styles from './page.module.css';
-import Comments from '@/components/Comments';
+import Comments from '@/components/common/Comments';
 
 interface Props {
   post: Post,

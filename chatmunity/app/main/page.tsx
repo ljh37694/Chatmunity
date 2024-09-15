@@ -1,5 +1,5 @@
 import styles from './page.module.css';
-import ChattingRoom from '@/components/ChattingRoom';
+import ChattingRoom from '@/components/common/ChattingRoom';
 import { connectDB } from '../utils/datadbase';
 import { Chat, Post } from '@/types';
 

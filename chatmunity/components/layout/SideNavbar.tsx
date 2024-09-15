@@ -1,7 +1,7 @@
 'use client'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import styles from './SideNavbar.module.css';
+import styles from '@/styles/layout/SideNavbar.module.css';
 import { faFire, faHome, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';

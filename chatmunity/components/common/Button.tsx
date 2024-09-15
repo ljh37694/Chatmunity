@@ -1,4 +1,4 @@
-import styles from './Button.module.css';
+import styles from '@/styles/common/Button.module.css';
 
 interface Props {
   text: string,

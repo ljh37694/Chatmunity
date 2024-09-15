@@ -1,5 +1,5 @@
 import { Chat, Post } from '@/types';
-import styles from './ChattingRoom.module.css';
+import styles from '@/styles/common/ChattingRoom.module.css'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
