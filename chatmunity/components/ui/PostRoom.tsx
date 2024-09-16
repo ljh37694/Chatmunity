@@ -1,14 +1,15 @@
-import { Chat } from '@/types';
-import styles from '@/styles/common/ChattingRoom.module.css'
+import styles from '@/styles/ui/PostRoom.module.css';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Post } from '@/types';
+import Link from 'next/link';
 
 interface Props {
-  chatList: Chat[],
+  postList: Post[],
 }
 
-export default function ChattingRoom(props: Props) {
-  const chatList = props.chatList;
+export default function PostRoom(props: Props) {
+  const postList = props.postList;
 
   return (
     <>
@@ -23,10 +24,10 @@ export default function ChattingRoom(props: Props) {
       </nav>
 
       <section className={styles.postContainer}>
-        {chatList.map((item, idx) => {
+        {postList.map((item, idx) => {
           return (
-            <div className={`${styles.post} ${idx % 2 === 0? styles.hotPost : ''}`} key={idx}>
-              <p className={styles.content}>{item.content}</p>
+            <div className={`${styles.post} ${idx % 2 === 0 ? styles.hotPost : ''}`} key={idx}>
+              <Link className={styles.content} href={{ pathname: `/post/${item._id}` }}>{item.content}</Link>
             </div>
           );
         })}
