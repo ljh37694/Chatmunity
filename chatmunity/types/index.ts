@@ -2,11 +2,17 @@ import { ObjectId } from "mongodb";
 
 export interface Chat {
   _id?: ObjectId,
+  writer?: string,
   content: string,
-  date?: Date,
+  date?: string,
+  post_id: string,
 }
 
-export interface Post extends Chat {
+export interface Post {
+  _id?: ObjectId,
+  writer?: string,
+  content: string,
+  date?: string,
   title: string,
   chatCount?: number,
   views: number,

@@ -25,7 +25,7 @@ export default async function PostDetail(props: Props) {
       <h3 className={styles.title}>{result?.title}</h3>
       <p className={styles.content}>{result?.content}</p>
       <div className={styles.commentContainer}>
-        <Comments />
+        <Comments postId={props.params.id} />
       </div>
     </div>
   );
