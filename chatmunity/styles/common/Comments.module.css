@@ -52,14 +52,9 @@
 .btnContainer {
   margin-top: 10px;
   float: right;
-  visibility: hidden;
 }
 
 .cancleBtn {
   background-color: rgb(219, 219, 219);
   margin-right: 10px;
-}
-
-.showBtn {
-  visibility: visible;
 }
