@@ -4,6 +4,7 @@ interface Props {
   text: string,
   className?: string,
   [key: string]: any,
+  onClick?: (e :React.MouseEvent<HTMLElement, MouseEvent>) => void,
 }
 
 export default function Button(props: Props) {
