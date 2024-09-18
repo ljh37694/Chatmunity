@@ -1,0 +1,17 @@
+.container {
+  position: absolute;
+  right: 0px;
+  top: 70px;
+  visibility: hidden;
+  z-index: 1;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #5d5d5d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.show {
+  visibility: visible;
+}

@@ -18,9 +18,10 @@
   color: rgb(114, 114, 114);
   padding: 10px;
 
-  & a {
+  & label {
     font-size: 26px;
     padding: 0 10px;
+    cursor: pointer;
   }
 }
 

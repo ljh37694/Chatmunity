@@ -1,17 +1,14 @@
-import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
-import { faHome, faMagnifyingGlass, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from '@/styles/layout/TopNavbar.module.css';
 import Link from "next/link";
+import TopNavbarMenu from "../ui/TopNavbarMenu";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
-export default function TopNavbar() {
-  interface NavMenu {
-    url: string,
-    icon: IconDefinition,
-  }
-  
-  const navMenuList: NavMenu[] = [{ url: "/main", icon: faHome }, { url: '/write', icon: faPlus }];
-  
+export default async function TopNavbar() {
+  const session = await getServerSession(authOptions);
+
   return (
     <nav id={styles.navbar}>
       <section className={styles.logo}>
@@ -24,13 +21,7 @@ export default function TopNavbar() {
       </section>
 
       <section className={styles.menu}>
-        {navMenuList.map((item, idx) => {
-          return (
-            <Link href={item.url} key={idx}>
-              <FontAwesomeIcon icon={item.icon} />
-            </Link>
-          );
-        })}
+        <TopNavbarMenu session={session} />
       </section>
     </nav>
   );
