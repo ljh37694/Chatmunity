@@ -14,6 +14,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Chatmunity",
   description: "채팅이 자유로운 커뮤니티입니다",
+  icons: {
+    icon: '/ChatImg.png',
+  }
 };
 
 export default function RootLayout({
