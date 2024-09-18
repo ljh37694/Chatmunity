@@ -11,8 +11,10 @@ export const authOptions = {
     }),
     KakaoProvider({
       clientId: process.env.KAKAO_CLIENT_ID as string,
-      clientSecret: process.env.KAKAO_CLIENT_SECRET as string, 
+      clientSecret: process.env.KAKAO_CLIENT_SECRET as string,
     }),
   ],
+  secret: process.env.JWT_SECRET,
 }
-export default NextAuth(authOptions)
+
+export default NextAuth(authOptions);
