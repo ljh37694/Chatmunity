@@ -1,9 +1,6 @@
 import { Post } from '@/types';
 import styles from './page.module.css';
 import Comments from '@/components/common/Comments';
-import { useEffect } from 'react';
-import axios from 'axios';
-import { useRouter } from 'next/router';
 import { connectDB } from '@/app/utils/datadbase';
 import { ObjectId } from 'mongodb';
 

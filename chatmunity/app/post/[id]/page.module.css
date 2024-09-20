@@ -18,4 +18,5 @@
 
 .content {
   margin-bottom: 2em;
+  white-space: pre-line;
 }

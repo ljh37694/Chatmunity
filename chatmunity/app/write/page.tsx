@@ -53,7 +53,7 @@ export default function Write() {
     <div>
       <form name='postForm' className={styles.form} onSubmit={onSubmit}>
         <input ref={titleRef} className={styles.title} placeholder='제목을 입력해주세요' />
-        <textarea placeholder='내용을 입력해주세요' ref={contentRef} className={styles.content} rows={28} cols={100}></textarea>
+        <textarea wrap='hard' placeholder='내용을 입력해주세요' ref={contentRef} className={styles.content} rows={28} cols={100}></textarea>
         <Button className={styles.button} type="submit" text='글쓰기'></Button>
       </form>
     </div>
