@@ -13,7 +13,7 @@ export default function Write() {
   const contentRef = useRef<HTMLTextAreaElement>(null);
 
   const router = useRouter();
-  const  { data: session, status } = useSession();
+  const { data: session, status } = useSession();
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();

@@ -33,8 +33,8 @@ export default function TopNavbarMenu(props: Props) {
           </label>
         );
       })}
-      
-      <TogglePanel isLogined={!!props.session} show={show} />
+
+      <TogglePanel session={props.session} show={show} />
     </div>
   );
 }
