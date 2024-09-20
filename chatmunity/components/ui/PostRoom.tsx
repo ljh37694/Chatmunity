@@ -27,7 +27,7 @@ export default function PostRoom(props: Props) {
         {postList.map((item, idx) => {
           return (
             <div className={`${styles.post} ${idx % 2 === 0 ? styles.hotPost : ''}`} key={idx}>
-              <Link className={styles.content} href={{ pathname: `/post/${item._id}` }}>{item.content}</Link>
+              <Link className={styles.content} href={{ pathname: `/post/${item._id}` }}>{item.title}</Link>
             </div>
           );
         })}
