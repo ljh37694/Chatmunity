@@ -11,11 +11,10 @@ export interface Chat {
 
 export interface Post {
   _id?: ObjectId,
-  writer?: string,
+  writer: string,
   content: string,
-  date?: string,
+  date: string,
   title: string,
-  chatCount?: number,
   views: number,
   likes: number,
 }

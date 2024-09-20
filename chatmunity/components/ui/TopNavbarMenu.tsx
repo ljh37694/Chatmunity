@@ -27,7 +27,7 @@ export default function TopNavbarMenu(props: Props) {
       {navMenuList.map((item, idx) => {
         return (
           <label key={idx} onClick={
-            item.url ? () => { router.push(item.url as string); console.log('asdfasdf') } : item.onClick
+            item.url ? () => { router.push(item.url as string); } : item.onClick
           }>
             <FontAwesomeIcon icon={item.icon} />
           </label>

@@ -20,6 +20,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           content: req.body.content,
           likes: 0,
           views: 0,
+          writer: req.body.writer,
+          date: new Date().toString(),
         });
       
         res.status(200).json(result);

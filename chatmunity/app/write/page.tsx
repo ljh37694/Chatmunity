@@ -6,26 +6,34 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import { FormEvent, useRef } from 'react';
 import { Post } from '@/types';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 export default function Write() {
   const titleRef = useRef<HTMLInputElement>(null);
   const contentRef = useRef<HTMLTextAreaElement>(null);
 
   const router = useRouter();
+  const  { data: session, status } = useSession();
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
+
+    console.log(session?.user?.email);
 
     if (!titleRef.current?.value) {
       alert('제목을 입력하세요');
     } else if (!contentRef.current?.value) {
       alert('내용을 입력하세요');
     } else {
+
+
       const post: Post = {
         title: titleRef.current!.value,
         content: contentRef.current!.value,
         likes: 0,
         views: 0,
+        writer: session?.user!.email as string,
+        date: new Date().toString(),
       };
   
       axios.post('/api/write', post)
