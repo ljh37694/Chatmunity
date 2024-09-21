@@ -3,10 +3,11 @@ import { ObjectId } from "mongodb";
 
 export interface Chat {
   _id?: ObjectId,
-  writer?: string,
+  email: string,
   content: string,
-  date?: string,
+  date: string,
   post_id: string,
+  name: string,
 }
 
 export interface Post {

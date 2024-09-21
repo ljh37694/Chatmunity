@@ -8,10 +8,17 @@
   display: flex;
   padding: 15px 20px;
   border-bottom: 1px solid #eee;
+  align-items: center;
 }
 
 .nickname {
-  width: 80px;
+  font-size: 14px;
+  margin-right: 1em;
+  padding: 5px;
+  border: 1px solid #eee;
+  border-radius: 100px;
+  background-color: aqua;
+  color: black;
 }
 
 .date {

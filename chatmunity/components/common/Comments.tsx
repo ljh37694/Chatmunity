@@ -5,9 +5,11 @@ import Button from './Button';
 import styles from '@/styles/common/Comments.module.css';
 import { Chat } from '@/types';
 import axios from 'axios';
+import { Session } from 'next-auth';
 
 interface Props {
   postId: string,
+  session: Session | null,
 }
 
 export default function Comments(props: Props) {
@@ -22,7 +24,6 @@ export default function Comments(props: Props) {
   const [chatList, setChatList] = useState<Chat[]>([]);
   const [text, setText] = useState<string>('');
 
-  const curDate = new Date();
   const imgUrl = 'https://mblogthumb-phinf.pstatic.net/20160817_259/retspe_14714118890125sC2j_PNG/%C7%C7%C4%AB%C3%F2_%281%29.png?type=w800';
 
   const [showBtn, setShowBtn] = useState(false);
@@ -30,24 +31,30 @@ export default function Comments(props: Props) {
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    const chat: Chat = {
-      content: text,
-      date: new Date().toString(),
-      writer: 'karina',
-      post_id: props.postId,
+    if (!props.session?.user) {
+      alert('댓글을 작성하려면 로그인을 해주십시오');
+    } else {
+      const chat: Chat = {
+        content: text,
+        date: new Date().toString(),
+        email: props.session?.user!.email as string,
+        post_id: props.postId,
+        name: props.session.user.name as string,
+      }
+      
+      axios.post('/api/chat', chat)
+        .then((res) => {
+          console.log(res.data);
+          setChatList([...chatList, chat]);
+          setText('');
+        });
     }
-    
-    axios.post('/api/chat', chat)
-      .then((res) => {
-        console.log(res.data);
-        setChatList([...chatList, chat]);
-      })
   }
 
   return (
     <div className={styles.container}>
       <section className={styles.write}>
-        <img src={imgUrl} className={styles.userImg} />
+        <img src={props.session?.user?.image ? props.session.user.image : imgUrl} className={styles.userImg} />
         <form onSubmit={onSubmit} className={styles.inputContainer}>
           <input onFocus={() => setShowBtn(true)} onInput={(e) => setText(e.currentTarget.value)} value={text} placeholder='댓글 쓰기...' className={styles.chatInput} />
           {
@@ -63,7 +70,7 @@ export default function Comments(props: Props) {
       {chatList.map((item, idx) => {
         return (
           <section className={styles.chat} key={idx}>
-            <p className={styles.nickname}>{item.writer}</p>
+            <p className={styles.nickname}>{props.session?.user?.email === item.email ? '작성자' : item.name}</p>
             <p className={styles.content}>{item.content}</p>
             <p className={styles.date}>{new Date(item.date as string).getFullYear()}</p>
           </section>
