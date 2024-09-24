@@ -2,17 +2,18 @@
 
 import { FormEvent, useEffect, useState } from 'react';
 import Button from './Button';
-import styles from '@/styles/common/Comments.module.css';
+import styles from '@/styles/common/CommentList.module.css';
 import { Chat } from '@/types';
 import axios from 'axios';
 import { Session } from 'next-auth';
+import Comment from '../ui/Comment';
 
 interface Props {
   postId: string,
   session: Session | null,
 }
 
-export default function Comments(props: Props) {
+export default function CommentList(props: Props) {
   useEffect(() => {
     axios.get('/api/chat?post_id=' + props.postId)
       .then((res) => {
@@ -60,7 +61,7 @@ export default function Comments(props: Props) {
           {
             showBtn ?
             <div className={styles.btnContainer}>
-              <Button onClick={() => {setShowBtn(false); setText('')}} className={styles.cancleBtn} text='취소' />
+              <Button onClick={(e) => {setShowBtn(false); setText('')}} className={styles.cancleBtn} text='취소' />
               <Button type='submit' text='댓글' />
             </div> : null
           }
@@ -69,11 +70,7 @@ export default function Comments(props: Props) {
 
       {chatList.map((item, idx) => {
         return (
-          <section className={styles.chat} key={idx}>
-            <p className={styles.nickname}>{props.session?.user?.email === item.email ? '작성자' : item.name}</p>
-            <p className={styles.content}>{item.content}</p>
-            <p className={styles.date}>{new Date(item.date as string).getFullYear()}</p>
-          </section>
+          <Comment key={idx} data={item} session={props.session} />
         );
       })}
     </div>

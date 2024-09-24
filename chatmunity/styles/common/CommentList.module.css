@@ -4,37 +4,6 @@
   border-top: 2px solid aqua;
 }
 
-.chat {
-  display: flex;
-  padding: 15px 20px;
-  border-bottom: 1px solid #eee;
-  align-items: center;
-}
-
-.name {
-  font-size: 14px;
-  margin-right: 1em;
-  padding: 5px;
-  border: 1px solid #eee;
-  border-radius: 100px;
-  background-color: aqua;
-  color: black;
-}
-
-.writerName {
-  background-color: #eee;
-}
-
-.date {
-  align-self: flex-end;
-  color: #afafaf;
-}
-
-.content {
-  flex-grow: 1;
-  cursor: pointer;
-}
-
 .write {
   display: flex;
   width: 100%;

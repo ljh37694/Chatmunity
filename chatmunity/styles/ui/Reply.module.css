@@ -1,0 +1,9 @@
+.container {
+  visibility: hidden;
+  width: 100%;
+  border: 1px solid black;
+}
+
+.active {
+  visibility: visible;
+}
