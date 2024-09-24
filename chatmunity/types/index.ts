@@ -27,6 +27,6 @@ export interface Profile {
 
 export interface TopNavMenu {
   url?: string,
-  onClick?: (e :React.MouseEvent<HTMLElement, MouseEvent>) => void,
+  onClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void,
   icon: IconDefinition,
 }

@@ -11,7 +11,7 @@
   align-items: center;
 }
 
-.nickname {
+.name {
   font-size: 14px;
   margin-right: 1em;
   padding: 5px;
@@ -21,6 +21,10 @@
   color: black;
 }
 
+.writerName {
+  background-color: #eee;
+}
+
 .date {
   align-self: flex-end;
   color: #afafaf;
@@ -28,6 +32,7 @@
 
 .content {
   flex-grow: 1;
+  cursor: pointer;
 }
 
 .write {

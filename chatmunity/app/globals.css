@@ -12,6 +12,10 @@
   font-style: normal;
 }
 
+:root {
+  --border-color: #eee;
+}
+
 * {
   margin: 0;
   padding: 0;
