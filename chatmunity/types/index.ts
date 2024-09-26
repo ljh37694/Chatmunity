@@ -2,7 +2,7 @@ import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { ObjectId } from "mongodb";
 
 export interface Chat {
-  _id?: ObjectId,
+  _id?: string,
   email: string,
   content: string,
   date: string,

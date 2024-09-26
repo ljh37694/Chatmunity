@@ -11,14 +11,27 @@
   padding: 10px;
 }
 
-.postContainer {
+.container {
   width: 100%;
   overflow-y: scroll;
   margin: 0 auto;
+  padding: 20px 0;
 }
 
-.postContainer::-webkit-scrollbar {
+.container::-webkit-scrollbar {
   display: none;
+}
+
+.searchBtn {
+  font-size: 24px;
+}
+
+.box {
+  width: 20%;
+}
+
+.title {
+  flex-grow: 1;
 }
 
 .post {
@@ -43,16 +56,4 @@
   & > * {
     background-color: aqua;
   }
-}
-
-.searchBtn {
-  font-size: 24px;
-}
-
-.box {
-  width: 20%;
-}
-
-.title {
-  flex-grow: 1;
 }

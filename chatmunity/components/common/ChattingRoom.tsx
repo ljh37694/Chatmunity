@@ -1,36 +1,30 @@
-import { Chat } from '@/types';
-import styles from '@/styles/common/ChattingRoom.module.css'
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+'use client'
 
-interface Props {
+import styles from '@/styles/common/ChattingRoom.module.css';
+import { Chat } from '@/types';
+
+interface ChattingRoomProps {
   chatList: Chat[],
+  children: React.ReactNode,
 }
 
-export default function ChattingRoom(props: Props) {
-  const chatList = props.chatList;
-
+export default function ChattingRoom (props: ChattingRoomProps) {
   return (
-    <>
-      <nav className={styles.topNav}>
-        <div className={styles.box}></div>
-        <h3 className={styles.title}>어쩌고 저쩌구</h3>
-        <div className={styles.box}>
-          <label className={styles.searchBtn}>
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </label>
-        </div>
-      </nav>
+    <section className={styles.container}>
+      { props.children }
+    </section>
+  );
+}
 
-      <section className={styles.postContainer}>
-        {chatList.map((item, idx) => {
-          return (
-            <div className={`${styles.post} ${idx % 2 === 0? styles.hotPost : ''}`} key={idx}>
-              <p className={styles.content}>{item.content}</p>
-            </div>
-          );
-        })}
-      </section>
-    </>
+interface ChattingProps {
+  isWriter?: boolean,
+  text: string,
+}
+
+export function Chatting (props: ChattingProps) {
+  return (
+    <div className={`${styles.post} ${props.isWriter ? styles.hotPost : ''}`}>
+      <p className={styles.content}>{props.text}</p>
+    </div>
   );
 }

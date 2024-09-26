@@ -1,3 +1,5 @@
+'use client'
+
 import styles from '@/styles/ui/Comment.module.css';
 import { Chat } from '@/types';
 import { Session } from 'next-auth';
@@ -26,7 +28,7 @@ export default function Comment(props: Props) {
           <p className={styles.content} onClick={onClickContent}>{item.content}</p>
           <p className={styles.date}>{new Date(item.date as string).getFullYear()}</p>
         </div>
-        <Reply className={`${showReply ? styles.showReply : ''}`} />
+        { showReply ? <Reply /> : null}
       </section>
   );
 }
