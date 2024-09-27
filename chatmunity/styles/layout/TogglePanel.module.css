@@ -2,7 +2,6 @@
   position: absolute;
   right: 10px;
   top: 60px;
-  visibility: hidden;
   z-index: 1;
   border-radius: 10px;
   background-color: #fff;
@@ -10,10 +9,6 @@
   flex-direction: column;
   width: 250px;
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-}
-
-.show {
-  visibility: visible;
 }
 
 .menuContainer {
