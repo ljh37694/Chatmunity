@@ -13,7 +13,6 @@ interface Props {
 
 export default function Comment(props: Props) {
   const { data: item, session } = props;
-  const username = session?.user?.name;
 
   const [showReply, setShowReply] = useState(false);
 
@@ -21,10 +20,11 @@ export default function Comment(props: Props) {
     setShowReply(!showReply);
   }
 
+  // 글작성자 == 댓글 작성자
   return (
       <section className={styles.container}>
         <div className={styles.rootChat}>
-          <p className={`${styles.name} ${username === item.name ? styles.writerName : ''}`}>{username === item.name ? '작성자' : item.name}</p>
+          <p className={`${styles.name} ${item.writer === item.email ? styles.writerName : ''}`}>{item.writer === item.email ? '작성자' : item.name}</p>
           <p className={styles.content} onClick={onClickContent}>{item.content}</p>
           <p className={styles.date}>{new Date(item.date as string).getFullYear()}</p>
         </div>

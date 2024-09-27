@@ -1,5 +1,3 @@
-'use client'
-
 import styles from '@/styles/common/ChattingRoom.module.css';
 import { Chat } from '@/types';
 
