@@ -5,12 +5,13 @@ import LogoutButton from '../ui/LogoutButton';
 import LoginButton from '../ui/LoginButton';
 import { Session } from 'next-auth';
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
+import Button from '../common/Button';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   session: Session | null,
   setShow: Dispatch<SetStateAction<boolean>>,
   [key: string]: any,
-  show: boolean,
 }
 
 export default function TogglePanel(props: Props) {
@@ -18,7 +19,8 @@ export default function TogglePanel(props: Props) {
 
   const ref = useRef<HTMLDivElement>(null);
 
-  
+  const router = useRouter();
+
   const clickOut = (e: MouseEvent) =>{
     if (props.show && ref.current && !ref.current.contains(e.target as Node)) {
       setShow(false);
@@ -41,6 +43,7 @@ export default function TogglePanel(props: Props) {
       </section>
 
       <section className={styles.menuContainer}>
+        <Button onClick={() => router.push('/mypage')} text='내정보' className={styles.myInfoBtn} />
         { props.session ? <LogoutButton /> : <LoginButton /> }
       </section>
     </div>

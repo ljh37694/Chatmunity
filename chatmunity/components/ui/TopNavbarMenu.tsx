@@ -35,8 +35,7 @@ export default function TopNavbarMenu(props: Props) {
       })}
 
       {
-        show ? <TogglePanel setShow={setShow} session={props.session} show={show} /> : null
-
+        show ? <TogglePanel setShow={setShow} session={props.session} /> : null
       }
     </div>
   );

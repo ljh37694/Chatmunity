@@ -16,7 +16,13 @@
   width: 100%;
   border-bottom: 1px solid #eee;
   padding: 15px 20px;
-  align-items: center;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+}
+
+.menuContainer > button:not(:last-child) {
+  margin-bottom: 10px;
 }
 
 .userImg {
@@ -25,4 +31,8 @@
   border-radius: 100px;
   object-fit: cover;
   margin-right: 10px;
+}
+
+.myInfoBtn {
+  background-color: #bdbdbd !important;
 }
