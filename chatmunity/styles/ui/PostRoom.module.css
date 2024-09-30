@@ -1,7 +1,6 @@
 .topNav {
   text-align: center;
-  font-size: 30px;
-  width: 100%;
+  font-size: 30px;  
   background-color: #3f3f3ff4;
   height: 80px;
   display: flex;
@@ -51,8 +50,4 @@
 
 .box {
   width: 20%;
-}
-
-.title {
-  flex-grow: 1;
 }

@@ -1,6 +1,4 @@
 import styles from '@/styles/ui/PostRoom.module.css';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Post } from '@/types';
 import Link from 'next/link';
 
@@ -14,13 +12,7 @@ export default function PostRoom(props: Props) {
   return (
     <>
       <nav className={styles.topNav}>
-        <div className={styles.box}></div>
         <h3 className={styles.title}>어쩌고 저쩌구</h3>
-        <div className={styles.box}>
-          <label className={styles.searchBtn}>
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </label>
-        </div>
       </nav>
 
       <section className={styles.postContainer}>

@@ -27,9 +27,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <TopNavbar />
-        <SideNavbar />
-        <FriendsPanel />
+        <section id="top-navbar">
+          <TopNavbar />
+        </section>
+
+        <section id="left-panel">
+         <SideNavbar />
+        </section>
+
+        <section id="right-panel">
+         <FriendsPanel />
+        </section>
+
         <main id="main-panel">
           {children}
         </main>

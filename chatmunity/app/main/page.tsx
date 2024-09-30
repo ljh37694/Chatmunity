@@ -12,9 +12,7 @@ export default async function Main() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.postContainer}>
-        <PostRoom postList={result} />
-      </div>
+      <PostRoom postList={result} />
     </div>
   );
 }
