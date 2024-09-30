@@ -22,7 +22,7 @@ export default function TogglePanel(props: Props) {
   const router = useRouter();
 
   const clickOut = (e: MouseEvent) =>{
-    if (props.show && ref.current && !ref.current.contains(e.target as Node)) {
+    if (ref.current && !ref.current.contains(e.target as Node)) {
       setShow(false);
     }
   };
