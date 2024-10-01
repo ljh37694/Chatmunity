@@ -27,6 +27,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <main id="main-panel">
+          <div className="backdrop"></div>
+          {children}
+        </main>
+
         <section id="top-navbar">
           <TopNavbar />
         </section>
@@ -38,10 +43,6 @@ export default function RootLayout({
         <section id="right-panel">
          <FriendsPanel />
         </section>
-
-        <main id="main-panel">
-          {children}
-        </main>
       </body>
     </html>
   );

@@ -29,7 +29,7 @@ export default function SideNavbar() {
   }, [activeMenu]);
 
   return (
-    <nav id={styles['navbar']}>
+    <nav className={styles['navbar']}>
       <section className={styles.menuContainer}>
         {navMenuList.map((item, idx) => {
           return (

@@ -1,10 +1,4 @@
-#panel {
-  position: absolute;
-  top: 70px;
-  right: 0;
-  width: 240px;
-  height: calc(100% - 70px);
-  border-left: 1px solid black;
+.panel {
   padding: 0 10px;
   overflow-y: hidden;
   display: flex;

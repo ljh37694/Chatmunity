@@ -19,7 +19,7 @@ export default function FriendsPanel() {
   ];
   
   return (
-    <div id={styles.panel}>
+    <div className={styles.panel}>
       <h3 className={styles.title}>Friends</h3>
       <section className={styles.content}>
         {profileList.map((item, idx) => {

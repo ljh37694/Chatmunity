@@ -35,3 +35,55 @@ a {
   width: calc(100% - 480px);
   height: calc(100% - 70px);
 }
+
+#top-navbar {
+  position: absolute;
+  border: 1px solid black;
+  border-left: none;
+  border-right: none;
+  height: 70px;
+  width: 100%;
+}
+
+#left-panel {
+  position: absolute;
+  left: 0;
+  top: 70px;
+  border-right: 1px solid black;
+  height: calc(100% - 70px);
+  width: 240px;
+  z-index: 3;
+  background-color: #fff;
+  transition: all 0.6s;
+}
+
+#right-panel {
+  position: absolute;
+  top: 70px;
+  right: 0;
+  width: 240px;
+  height: calc(100% - 70px);
+  border-left: 1px solid black;
+}
+
+.backdrop {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .hide-left-panel {
+    left: -240px !important;
+  }
+
+  .show-left-panel {
+    left: 0px !important;
+  }
+
+  #main-panel {
+    left: 0px;
+    width: calc(100% - 240px);
+  }
+}

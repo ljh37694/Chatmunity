@@ -1,9 +1,5 @@
-#navbar {
-  border: 1px solid black;
-  border-left: none;
-  border-right: none;
-  height: 70px;
-  width: 100%;
+.navbar {
+  display: flex;
   display: flex;
   padding: 10px;
   justify-content: space-between;
@@ -61,4 +57,20 @@
 
 .search-input:focus-visible {
   outline: none;
+}
+
+.drawerBtn {
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  color: black;
+  cursor: pointer;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .drawerBtn {
+    display: inline;
+  }
 }
