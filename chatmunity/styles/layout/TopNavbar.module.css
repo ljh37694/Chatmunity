@@ -43,7 +43,7 @@
   padding: 5px 10px;
   border-radius: 10px;
   width: 50%;
-  min-width: 250px;
+  max-width: 500px;
 }
 
 .search-input {
@@ -72,5 +72,9 @@
 @media (max-width: 768px) {
   .drawerBtn {
     display: inline;
+  }
+
+  .search-container {
+    width: 35%;
   }
 }

@@ -2,7 +2,7 @@
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from '@/styles/layout/SideNavbar.module.css';
-import { faFire, faHome, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faComments, faFire, faHome, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -18,6 +18,7 @@ export default function SideNavbar() {
   const navMenuList: NavMenu[] = [
     { text: 'Home', icon: faHome, url: '/main'},
     { text: 'Hot', icon: faFire, url: '/hot' },
+    { text: 'Room', icon: faComments, url: '/room'}
   ];
 
   const [activeMenu, setActiveMenu] = useState(-1);
@@ -37,7 +38,7 @@ export default function SideNavbar() {
                 setActiveMenu(idx);
                 router.push(item.url);
               }} >
-              <FontAwesomeIcon icon={item.icon} />
+              <FontAwesomeIcon icon={item.icon} className={styles.icon} />
               <p>{item.text}</p>
             </label>
           );
