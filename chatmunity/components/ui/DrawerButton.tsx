@@ -3,7 +3,7 @@
 import styles from '@/styles/layout/TopNavbar.module.css';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function DrawerButton() {
   const [show, setShow] = useState<boolean>(false);

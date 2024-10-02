@@ -74,6 +74,10 @@ a {
 }
 
 @media (max-width: 768px) {
+  #left-panel {
+    left: -240px;
+  }
+
   .hide-left-panel {
     left: -240px !important;
   }
