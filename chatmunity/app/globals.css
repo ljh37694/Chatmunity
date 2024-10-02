@@ -37,7 +37,7 @@ a {
 }
 
 #top-navbar {
-  position: absolute;
+  position: fixed;
   border: 1px solid black;
   border-left: none;
   border-right: none;
@@ -46,7 +46,7 @@ a {
 }
 
 #left-panel {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 70px;
   border-right: 1px solid black;
@@ -59,7 +59,7 @@ a {
 }
 
 #right-panel {
-  position: absolute;
+  position: fixed;
   top: 70px;
   right: 0;
   width: 240px;

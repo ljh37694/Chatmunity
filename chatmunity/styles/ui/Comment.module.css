@@ -9,6 +9,12 @@
 .rootChat {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.chatContainer {
+  display: flex;
+  align-items: center;
 }
 
 .name {
@@ -32,6 +38,7 @@
 
 .content {
   flex-grow: 1;
+  max-width: 80%;
   cursor: pointer;
 }
 

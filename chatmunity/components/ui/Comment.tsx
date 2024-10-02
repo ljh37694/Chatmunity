@@ -24,8 +24,10 @@ export default function Comment(props: Props) {
   return (
       <section className={styles.container}>
         <div className={styles.rootChat}>
-          <p className={`${styles.name} ${item.writer === item.email ? styles.writerName : ''}`}>{item.writer === item.email ? '작성자' : item.name}</p>
-          <p className={styles.content} onClick={onClickContent}>{item.content}</p>
+          <div className={styles.chatContainer}>
+            <p className={`${styles.name} ${item.writer === item.email ? styles.writerName : ''}`}>{item.writer === item.email ? '작성자' : item.name}</p>
+            <p className={styles.content} onClick={onClickContent}>{item.content}</p>
+          </div>
           <p className={styles.date}>{new Date(item.date as string).getFullYear()}</p>
         </div>
         { showReply ? <Reply /> : null}
