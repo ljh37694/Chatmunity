@@ -32,16 +32,16 @@ export default function RootLayout({
           {children}
         </main>
 
-        <section id="top-navbar">
-          <TopNavbar />
-        </section>
-
         <section id="left-panel">
          <SideNavbar />
         </section>
 
         <section id="right-panel">
          <FriendsPanel />
+        </section>
+
+        <section id="top-navbar">
+          <TopNavbar />
         </section>
       </body>
     </html>

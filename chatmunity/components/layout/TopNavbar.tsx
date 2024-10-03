@@ -1,4 +1,4 @@
-import { faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from '@/styles/layout/TopNavbar.module.css';
 import Link from "next/link";
@@ -23,7 +23,7 @@ export default async function TopNavbar() {
       </section>
 
       <section className={styles.menu}>
-        <TopNavbarMenu session={session} />
+        <TopNavbarMenu />
       </section>
     </nav>
   );

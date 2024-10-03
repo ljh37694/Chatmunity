@@ -78,6 +78,7 @@ a {
 @media (max-width: 768px) {
   #left-panel {
     left: -240px;
+    width: 220px;
   }
 
   .hide-left-panel {

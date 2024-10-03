@@ -2,7 +2,6 @@
   position: absolute;
   right: 10px;
   top: 60px;
-  z-index: 1;
   border-radius: 10px;
   background-color: #fff;
   display: flex;
@@ -17,7 +16,7 @@
   border-bottom: 1px solid #eee;
   padding: 15px 20px;
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
   flex-direction: column;
 }
 
@@ -31,6 +30,7 @@
   border-radius: 100px;
   object-fit: cover;
   margin-right: 10px;
+  user-select: none;
 }
 
 .myInfoBtn {
