@@ -1,0 +1,9 @@
+.icon {
+  display: none;
+}
+
+@media (max-width: 786px) {
+  .icon {
+    display: inline;
+  }
+}

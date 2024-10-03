@@ -4,8 +4,8 @@ import { TopNavMenu } from "@/types";
 import { faHome, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
-import { Session } from "next-auth";
 import UserBUtton from "./UserButton";
+import FriendButton from "./FriendButton";
 
 export default function TopNavbarMenu() {
   const router = useRouter();
@@ -16,7 +16,7 @@ export default function TopNavbarMenu() {
   ];
 
   return (
-    <div>
+    <>
       {navMenuList.map((item, idx) => {
         return (
           <label className="user-btn" key={idx} onClick={
@@ -28,6 +28,7 @@ export default function TopNavbarMenu() {
       })}
 
       <UserBUtton />
-    </div>
+      <FriendButton />
+    </>
   );
 }
