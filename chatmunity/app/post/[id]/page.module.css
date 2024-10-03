@@ -1,12 +1,12 @@
 .container {
-  width: 700px;
+  width: 100%;
   min-width: 350px;
   margin: 0 auto;
   padding: 20px;
 }
 
 .commentContainer {
-  width: 700px;
+  width: 100%;
 }
 
 .title {

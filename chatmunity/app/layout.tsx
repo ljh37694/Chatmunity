@@ -6,6 +6,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import TopNavbar from "@/components/layout/TopNavbar";
 import SideNavbar from "@/components/layout/SideNavbar";
 import FriendsPanel from "@/components/layout/FriendsPanel";
+import Backdrop from "@/components/layout/Backdrop";
 
 config.autoAddCss = false;
 
@@ -28,8 +29,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <main id="main-panel">
-          <div className="backdrop"></div>
           {children}
+          <Backdrop />
         </main>
 
         <section id="left-panel">
