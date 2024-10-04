@@ -9,6 +9,7 @@ export interface Chat {
   post_id: string,
   name: string,
   writer: string,
+  root_chat?: string,
 }
 
 export interface Post {

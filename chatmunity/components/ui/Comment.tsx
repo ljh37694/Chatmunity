@@ -30,7 +30,7 @@ export default function Comment(props: Props) {
           </div>
           <p className={styles.date}>{new Date(item.date as string).getFullYear()}</p>
         </div>
-        { showReply ? <Reply /> : null}
+        { showReply ? <Reply data={item} session={session} rootChat={item._id?.toString() as string} /> : null}
       </section>
   );
 }
