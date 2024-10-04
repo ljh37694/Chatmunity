@@ -17,7 +17,6 @@ export default function UserBUtton() {
     if (panelRef.current && !panelRef.current.contains(e.target as Node) && 
         userBtnRef.current && !userBtnRef.current.contains(e.target as Node)) {
       setShow(false);
-      console.log(show);
     }
   };
 
