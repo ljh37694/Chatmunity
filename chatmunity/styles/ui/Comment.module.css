@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  padding: 15px 20px;
+  padding: 15px 0px;
   border-bottom: 1px solid #eee;
   width: 100%;
 }
@@ -15,6 +15,7 @@
 .chatContainer {
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .name {
@@ -44,4 +45,16 @@
 
 .showReply {
   visibility: visible !important;
+}
+
+.replyContainer {
+  margin-left: 30px;
+}
+
+.replyChat{
+  border: 1px solid #eee;
+  border-top: none;
+  padding: 10px;
+  background-color: rgb(202, 202, 202);
+  margin: 0;
 }

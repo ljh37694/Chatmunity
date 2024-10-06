@@ -36,6 +36,7 @@ export default function CommentInput(props: Props) {
         post_id: props.postId,
         name: props.session.user.name as string,
         writer: props.session.user.email as string,
+        root_chat: null,
       }
       
       axios.post('/api/chat', chat)

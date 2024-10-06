@@ -15,7 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (req.method === 'GET') {
       if (typeof postId === 'string') {
-          result = await db.collection<Chat>('chat').find({ post_id: postId }).toArray();
+        result = await db.collection<Chat>('chat').find({ post_id: postId, root_chat: null }).toArray();
       }
     }
 
