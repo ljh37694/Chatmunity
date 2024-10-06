@@ -10,7 +10,7 @@ export default function PostRoom(props: Props) {
   const postList = props.postList;
 
   return (
-    <>
+    <div className={styles.container}>
       <nav className={styles.topNav}>
         <h3 className={styles.title}>어쩌고 저쩌구</h3>
       </nav>
@@ -24,6 +24,6 @@ export default function PostRoom(props: Props) {
           );
         })}
       </section>
-    </>
+    </div>
   );
 }

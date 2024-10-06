@@ -11,8 +11,6 @@ export default async function Main() {
   const result = await db.collection<Post>('post').find().toArray();
 
   return (
-    <div className={styles.container}>
-      <PostRoom postList={result} />
-    </div>
+    <PostRoom postList={result} />
   );
 }

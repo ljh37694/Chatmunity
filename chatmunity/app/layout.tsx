@@ -29,7 +29,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <main id="main-panel">
-          {children}
+          <div className="main-container">
+            {children}
+          </div>
           <Backdrop />
         </main>
 
