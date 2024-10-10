@@ -32,3 +32,9 @@ export interface TopNavMenu {
   onClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void,
   icon: IconDefinition,
 }
+
+export interface Room {
+  title: string,
+  category?: string,
+  img?: string,
+}
