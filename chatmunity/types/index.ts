@@ -20,6 +20,7 @@ export interface Post {
   title: string,
   views: number,
   likes: number,
+  room_id: string,
 }
 
 export interface Profile {

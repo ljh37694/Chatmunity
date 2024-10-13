@@ -14,6 +14,7 @@
   width: 100%;
   overflow-y: scroll;
   margin: 0 auto;
+  margin-bottom: 20px;
 }
 
 .postContainer::-webkit-scrollbar {
@@ -21,7 +22,7 @@
 }
 
 .post {
-  margin: 10px 30px;
+  margin: 10px 0;
   display: flex;
   align-items: center;
   justify-content: right;

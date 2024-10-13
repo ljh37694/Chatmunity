@@ -3,9 +3,9 @@
 import Button from '@/components/common/Button';
 import styles from './page.module.css';
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { FormEvent, useRef } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import { Post } from '@/types';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
 export default function Write() {
@@ -13,7 +13,21 @@ export default function Write() {
   const contentRef = useRef<HTMLTextAreaElement>(null);
 
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { data: session, status } = useSession();
+
+  const [title, setTitle] = useState<string>('');
+
+  useEffect(() => {
+    const title = searchParams?.get('title');
+
+    console.log(title);
+
+    if (typeof title === 'string') {
+      setTitle(title);
+      console.log('hi')
+    }
+  }, []);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -25,8 +39,6 @@ export default function Write() {
     } else if (!contentRef.current?.value) {
       alert('내용을 입력하세요');
     } else {
-
-
       const post: Post = {
         title: titleRef.current!.value,
         content: contentRef.current!.value,
@@ -34,6 +46,7 @@ export default function Write() {
         views: 0,
         writer: session?.user!.email as string,
         date: new Date().toString(),
+        room_id: "asdf",
       };
   
       axios.post('/api/write', post)
@@ -52,9 +65,9 @@ export default function Write() {
   return (
     <div>
       <form name='postForm' className={styles.form} onSubmit={onSubmit}>
-        <input ref={titleRef} className={styles.title} placeholder='제목을 입력해주세요' />
+        <input value={title} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)} ref={titleRef} className={styles.title} placeholder='제목을 입력해주세요' />
         <textarea wrap='hard' placeholder='내용을 입력해주세요' ref={contentRef} className={styles.content} rows={28} cols={100}></textarea>
-        <Button className={styles.button} type="submit" text='글쓰기'></Button>
+        <Button className={styles.button} type="submit" text='글쓰기' />
       </form>
     </div>
   );

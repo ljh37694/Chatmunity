@@ -1,9 +1,11 @@
 import styles from '@/styles/ui/PostRoom.module.css';
 import { Post } from '@/types';
 import Link from 'next/link';
+import PostInput from './PostInput';
 
 interface Props {
   postList: Post[],
+  roomId: string,
 }
 
 export default function PostRoom(props: Props) {
@@ -24,6 +26,7 @@ export default function PostRoom(props: Props) {
           );
         })}
       </section>
+      <PostInput roomId={props.roomId} />
     </div>
   );
 }
