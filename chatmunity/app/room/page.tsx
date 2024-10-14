@@ -1,6 +1,8 @@
 import RoomItem from '@/components/ui/RoomItem';
 import styles from './page.module.css';
 import { Room } from '@/types';
+import Button from '@/components/common/Button';
+import CreateRoom from '@/components/ui/CreateRoom';
 
 export default function RoomPage() {
   const roomList: Room[] = [
@@ -35,6 +37,7 @@ export default function RoomPage() {
 
   return (
     <div className={styles.container}>
+      <CreateRoom />
       {
         roomList.map((item, idx) => {
           return (

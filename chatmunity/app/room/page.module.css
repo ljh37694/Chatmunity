@@ -6,3 +6,10 @@
 .container::-webkit-scrollbar {
   display: none;
 }
+
+.roomBtn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 20px 0;
+}

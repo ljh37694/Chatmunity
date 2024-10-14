@@ -6,4 +6,5 @@
   background-color: aqua;
   color: #fff;
   user-select: none;
+  cursor: pointer;
 }

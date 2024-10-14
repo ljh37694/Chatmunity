@@ -14,7 +14,7 @@ export default function RoomItem(props: Props) {
 
   return (
     <div className={styles.roomContainer} onClick={() => {
-      router.push('/room/asdf');
+      router.push('/room/' + data.title);
     }}>
       <div>
         <img className={styles.roomImg} src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png' />
