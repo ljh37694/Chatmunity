@@ -22,6 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           views: 0,
           writer: req.body.writer,
           date: new Date().toString(),
+          room_id: req.body.room_id,
         });
       
         res.status(200).json(result);
