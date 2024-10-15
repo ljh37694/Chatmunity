@@ -38,4 +38,5 @@ export interface Room {
   title: string,
   category?: string,
   img?: string,
+  id: string,
 }

@@ -1,7 +1,7 @@
 import PostRoom from "@/components/ui/PostRoom";
 import styles from "./page.module.css";
 import { connectDB } from "@/app/utils/datadbase";
-import { Post } from "@/types";
+import { Post, Room } from "@/types";
 
 interface Props {
   params: {
@@ -13,12 +13,12 @@ export default async function RoomDetail(props: Props) {
   const client = await connectDB;
   const db = client.db('Chatmunity');
 
-  const result = await db.collection<Post>('post').find().toArray();
+  const postList = await db.collection<Post>('post').find().toArray();
+  const roomData = await db.collection<Room>('room').findOne({ id: props.params.id });
 
   return (
     <div>
-      {props.params.id}
-      <PostRoom postList={result} roomId={props.params.id} />
+      <PostRoom postList={postList} roomData={roomData} />
     </div>
   );
 }

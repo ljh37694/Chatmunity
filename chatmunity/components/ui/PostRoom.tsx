@@ -1,20 +1,20 @@
 import styles from '@/styles/ui/PostRoom.module.css';
-import { Post } from '@/types';
+import { Post, Room } from '@/types';
 import Link from 'next/link';
 import PostInput from './PostInput';
 
 interface Props {
   postList: Post[],
-  roomId: string,
+  roomData: Room | null,
 }
 
 export default function PostRoom(props: Props) {
-  const postList = props.postList;
+  const { postList, roomData } = props;
 
   return (
     <div className={styles.container}>
       <nav className={styles.topNav}>
-        <h3 className={styles.title}>어쩌고 저쩌구</h3>
+        <h3 className={styles.title}>{roomData?.id}</h3>
       </nav>
 
       <section className={styles.postContainer}>
@@ -26,7 +26,8 @@ export default function PostRoom(props: Props) {
           );
         })}
       </section>
-      <PostInput roomId={props.roomId} />
+
+      <PostInput roomId={roomData?.id as string} />
     </div>
   );
 }
