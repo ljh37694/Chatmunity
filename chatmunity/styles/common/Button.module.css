@@ -1,15 +1,8 @@
-@font-face {
-  font-family: 'ghanachoco';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ghanachoco.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
 .button {
-  font-family: 'ghanachoco';
-  padding: 10px;
+  font-family: 'Paperlogy-7Bold';
+  padding: 8px;
   border-radius: 10px;
-  font-size: 18px;
+  font-size: 16px;
   border: none;
   background-color: #c9ffe5;
   color: #482505;

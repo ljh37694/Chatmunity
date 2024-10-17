@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Paperlogy-5Medium';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
 .roomContainer {
   display: flex;
   padding: 20px 0;
@@ -19,4 +26,8 @@
 
 .title {
   margin-bottom: 8px;
+}
+
+.content {
+  font-size: 14px;
 }

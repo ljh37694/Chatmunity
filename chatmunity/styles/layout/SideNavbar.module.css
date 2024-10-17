@@ -21,6 +21,7 @@
   & p {
     margin-left: 10px;
     user-select: none;
+    font-family: 'Pretendard-Bold', 'Courier New', Courier, monospace;
   }
 }
 
