@@ -21,11 +21,13 @@ export default function SideNavbar() {
     { text: 'Room', icon: faComments, url: '/room'}
   ];
 
-  const [activeMenu, setActiveMenu] = useState(-1);
+  const [activeMenu, setActiveMenu] = useState<number>(-1);
 
   useEffect(() => {
     if (activeMenu !== -1) {
       router.push(navMenuList[activeMenu].url);
+    } else {
+      setActiveMenu(Number(sessionStorage.getItem('activeSideMenu')));
     }
   }, [activeMenu]);
 
@@ -36,6 +38,7 @@ export default function SideNavbar() {
           return (
             <label className={`${styles.menu} ${activeMenu === idx ? styles.activeMenu : ''}`} key={idx} onClick={() => {
                 setActiveMenu(idx);
+                sessionStorage.setItem('activeSideMenu', `${idx}`);
                 router.push(item.url);
               }} >
               <FontAwesomeIcon icon={item.icon} className={styles.icon} />

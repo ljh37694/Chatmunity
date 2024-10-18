@@ -3,13 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from '@/styles/layout/TopNavbar.module.css';
 import Link from "next/link";
 import TopNavbarMenu from "../ui/TopNavbarMenu";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import DrawerButton from "../ui/DrawerButton";
 
 export default async function TopNavbar() {
-  const session = await getServerSession(authOptions);
-
   return (
     <nav className={styles.navbar}>
       <section className={styles.left}>
