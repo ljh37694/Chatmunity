@@ -12,18 +12,24 @@ export default async function TopNavbar() {
 
   return (
     <nav className={styles.navbar}>
-      <section className={styles.logo}>
-        <DrawerButton />
-        <Link href='/'>CM</Link>
+      <section className={styles.left}>
+        <div className={styles.logo}>
+          <DrawerButton />
+          <Link href='/'>CM</Link>
+        </div>
       </section>
 
-      <section className={styles["search-container"]}>
-        <label><FontAwesomeIcon icon={faMagnifyingGlass} /></label>
-        <input className={styles["search-input"]} />
+      <section className={styles.middle}>
+        <div className={styles.searchContainer}>
+          <label><FontAwesomeIcon icon={faMagnifyingGlass} /></label>
+          <input className={styles.searchInput} />
+        </div>
       </section>
 
-      <section className={styles.menu}>
-        <TopNavbarMenu />
+      <section className={styles.right}>
+        <div className={styles.menu}>
+          <TopNavbarMenu />
+        </div>
       </section>
     </nav>
   );
