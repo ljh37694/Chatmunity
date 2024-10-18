@@ -8,7 +8,13 @@ import { Post } from '@/types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
-export default function Write() {
+interface Props {
+  params: {
+    title: string,
+  }
+}
+
+export default function Write(props: Props) {
   const titleRef = useRef<HTMLInputElement>(null);
   const contentRef = useRef<HTMLTextAreaElement>(null);
 
@@ -25,7 +31,6 @@ export default function Write() {
 
     if (typeof title === 'string') {
       setTitle(title);
-      console.log('hi')
     }
   }, []);
 
@@ -46,7 +51,7 @@ export default function Write() {
         views: 0,
         writer: session?.user!.email as string,
         date: new Date().toString(),
-        room_id: "asdf",
+        room_id: props.params.title,
       };
   
       axios.post('/api/write', post)

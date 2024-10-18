@@ -13,7 +13,9 @@ export default async function RoomDetail(props: Props) {
   const client = await connectDB;
   const db = client.db('Chatmunity');
 
-  const postList = await db.collection<Post>('post').find().toArray();
+  const postList = await db.collection<Post>('post').find({
+    room_id: props.params.id,
+  }).toArray();
   const roomData = await db.collection<Room>('room').findOne({ id: props.params.id });
 
   return (
