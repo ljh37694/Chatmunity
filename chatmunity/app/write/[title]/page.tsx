@@ -58,7 +58,7 @@ export default function Write(props: Props) {
         .then((res: AxiosResponse) => {
           console.log(res.data);
 
-          router.push('/main');
+          router.push('/room/' + props.params.title);
           router.refresh();
         })
         .catch((e: AxiosError) => {
