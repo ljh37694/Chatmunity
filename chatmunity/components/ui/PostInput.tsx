@@ -7,6 +7,7 @@ import { useRef, useState } from 'react';
 
 interface Props {
   roomId: string,
+  className: string,
 }
 
 export default function PostInput(props: Props) {
@@ -19,7 +20,7 @@ export default function PostInput(props: Props) {
   console.log(props);
 
   return (
-    <form className={styles.form} onSubmit={(e: React.FormEvent) => {
+    <form className={`${styles.form} ${props.className}`} onSubmit={(e: React.FormEvent) => {
       e.preventDefault();
 
       if (!inputRef.current?.value) {

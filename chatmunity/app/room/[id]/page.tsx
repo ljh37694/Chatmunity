@@ -19,7 +19,7 @@ export default async function RoomDetail(props: Props) {
   const roomData = await db.collection<Room>('room').findOne({ id: props.params.id });
 
   return (
-    <div>
+    <div className={styles.container}>
       <PostRoom postList={postList} roomData={roomData} />
     </div>
   );
