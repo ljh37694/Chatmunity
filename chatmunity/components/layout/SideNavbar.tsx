@@ -24,9 +24,7 @@ export default function SideNavbar() {
   const [activeMenu, setActiveMenu] = useState<number>(-1);
 
   useEffect(() => {
-    if (activeMenu !== -1) {
-      router.push(navMenuList[activeMenu].url);
-    } else {
+    if (activeMenu == -1) {
       setActiveMenu(Number(sessionStorage.getItem('activeSideMenu')));
     }
   }, [activeMenu]);
