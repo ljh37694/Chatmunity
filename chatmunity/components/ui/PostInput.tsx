@@ -26,7 +26,11 @@ export default function PostInput(props: Props) {
       if (!inputRef.current?.value) {
         alert('빈 칸입니다');
       } else {
-        router.push('/write/' + props.roomId + "?title=" + inputRef.current.value);
+        console.log(inputRef.current.value);
+
+        const title: string = inputRef.current.value;
+
+        router.push('/write/' + props.roomId + "?title=" + encodeURIComponent(title));
       }
     }}>
       <input className={styles.input} value={text} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setText(e.target.value)} ref={inputRef} />
