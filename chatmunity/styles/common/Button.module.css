@@ -8,4 +8,5 @@
   color: #482505;
   user-select: none;
   cursor: pointer;
+  white-space: nowrap;
 }
