@@ -1,6 +1,5 @@
 'use client'
 
-import styles from '@/styles/ui/UserButton.module.css';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useRef, useState } from 'react';
