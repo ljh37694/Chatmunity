@@ -21,7 +21,6 @@ export interface Post {
   views: number,
   likes: number,
   room_id: string,
-  name: string,
 }
 
 export interface UserData {
