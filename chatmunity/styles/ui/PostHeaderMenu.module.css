@@ -1,0 +1,39 @@
+.container {
+  cursor: pointer;
+  padding: 3px;
+  user-select: none;
+  -webkit-user-select: none;
+  /* (safari, chrome) browsers */
+  -moz-user-select: none;
+  /* mozilla browsers */
+  -khtml-user-select: none;
+  /* konqueror browsers */
+
+  -ms-user-select: none; /* IE10+ */
+  position: relative;
+}
+
+.modal {
+  position: absolute;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+  width: 150px;
+  right: 3px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  padding: 10px 30px;
+  background-color: #fff;
+  width: 100%;
+}
+
+.menu:hover {
+  background-color: rgb(217, 226, 225);
+}
+
+.icon {
+  margin-right: 8px;
+}

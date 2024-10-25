@@ -1,10 +1,9 @@
 import { connectDB } from '@/app/utils/datadbase';
 import styles from '@/styles/ui/PostHeader.module.css';
 import { Post, UserData } from '@/types';
-import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import dayjs, { Dayjs } from 'dayjs';
 import duration from 'dayjs/plugin/duration';
+import PostHeaderMenu from './PostHeaderMenu';
 
 dayjs.extend(duration);
 
@@ -49,7 +48,7 @@ export default async function PostHeader(props: Props) {
           <p>{writerData?.name}</p>
           <p className={styles.time}>{ timeDiff(postDate) }</p>
         </div>
-        <FontAwesomeIcon className={styles.menu} icon={faEllipsisVertical} />
+        <PostHeaderMenu />
       </div>
     </section>
   );
