@@ -8,7 +8,14 @@ export default async function RoomPage() {
   const client = await connectDB;
   const db = client.db('Chatmunity');
 
-  const roomList: Room[] = await db.collection<Room>('room').find().toArray();
+  const result: Room[] = await db.collection<Room>('room').find().toArray();
+
+  const roomList =  result.map((item): Room => {
+    return {
+      ...item,
+      _id: item._id?.toString(),
+    }
+  });
 
   return (
     <div className={styles.container}>

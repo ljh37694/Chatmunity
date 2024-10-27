@@ -42,6 +42,7 @@ export interface TopNavMenu {
 }
 
 export interface Room {
+  _id?: ObjectId | string,
   title: string,
   category?: string,
   img?: string,
