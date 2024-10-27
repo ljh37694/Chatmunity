@@ -1,6 +1,5 @@
 .container {
   cursor: pointer;
-  padding: 3px;
   user-select: none;
   -webkit-user-select: none;
   /* (safari, chrome) browsers */
@@ -36,4 +35,8 @@
 
 .icon {
   margin-right: 8px;
+}
+
+.menuIcon {
+  padding: 3px;
 }

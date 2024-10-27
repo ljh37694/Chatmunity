@@ -4,6 +4,8 @@ import { Post, UserData } from '@/types';
 import dayjs, { Dayjs } from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import PostHeaderMenu from './PostHeaderMenu';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 dayjs.extend(duration);
 
@@ -14,8 +16,14 @@ interface Props {
 export default async function PostHeader(props: Props) {
   const { postData } = props;
 
+  if (postData?._id) {
+    postData._id = postData?._id?.toString();
+  }
+
   const client = await connectDB;
   const db = client.db('Chatmunity');
+
+  const session = await getServerSession(authOptions);
 
   const writerData = await db.collection<UserData>('user').findOne({ email: postData?.writer });
   
@@ -48,7 +56,7 @@ export default async function PostHeader(props: Props) {
           <p>{writerData?.name}</p>
           <p className={styles.time}>{ timeDiff(postDate) }</p>
         </div>
-        <PostHeaderMenu />
+        <PostHeaderMenu isWriter={session?.user?.email === writerData?.email} postData={postData as Post} />
       </div>
     </section>
   );

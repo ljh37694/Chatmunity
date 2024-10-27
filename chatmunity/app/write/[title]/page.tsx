@@ -37,8 +37,6 @@ export default function Write(props: Props) {
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    console.log(session?.user?.email);
-
     if (!titleRef.current?.value) {
       alert('제목을 입력하세요');
     } else if (!contentRef.current?.value) {
