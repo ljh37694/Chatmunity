@@ -1,9 +1,11 @@
 'use client'
 
 import styles from '@/styles/ui/PostHeaderMenu.module.css';
-import { Post } from '@/types';
+import { DmRoom, Post } from '@/types';
 import { faEllipsisVertical, faMessage, faPen, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
+import { Session } from 'next-auth';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -15,8 +17,8 @@ interface Menu {
 }
 
 interface Props {
-  isWriter: boolean,
   postData: Post,
+  session: Session | null,
 }
 
 export default function PostHeaderMenu(props: Props) {
@@ -38,7 +40,26 @@ export default function PostHeaderMenu(props: Props) {
       text: "DM",
       isWriterMenu: false,
       onClick: () => {
-        router.push("/dm");
+        axios({
+          method: "GET",
+          url: "/api/",
+          headers: {
+            'Authorization': 'Bearer YOUR_TOKEN',
+            'Content-Type': 'application/json',
+            data: JSON.stringify([props.session?.user?.email, props.postData.writer]),
+          }
+        })
+          .then((res) => {
+            if (res.data) {
+              router.push("/dm/" + res.data);
+            } else {
+              axios.post<DmRoom>('/api/dm', {
+                title: 
+              })
+                .then()
+            }
+          })
+          .catch((e) => console.log(e));
       }
     },
   ];
@@ -54,7 +75,7 @@ export default function PostHeaderMenu(props: Props) {
         <section className={styles.modal}>
           {
             menuList.map((item, idx) => {
-              if (!item.isWriterMenu || (item.isWriterMenu && props.isWriter)) {
+              if (!item.isWriterMenu || (item.isWriterMenu && props.session?.user?.email === props.postData.writer)) {
                 return (
                   <label className={styles.menu} key={idx} onClick={item.onClick}>
                     <FontAwesomeIcon className={styles.icon} icon={item.icon} />

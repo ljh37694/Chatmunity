@@ -21,7 +21,7 @@ export default function RoomItem(props: Props) {
       </div>
       <div>
         <h3 className={styles.title}>{data.title}</h3>
-        <p className={styles.content}>구글은 신이에요!!</p>
+        <p className={styles.content}>{data.content}</p>
       </div>
     </div>
   );

@@ -56,7 +56,7 @@ export default async function PostHeader(props: Props) {
           <p>{writerData?.name}</p>
           <p className={styles.time}>{ timeDiff(postDate) }</p>
         </div>
-        <PostHeaderMenu isWriter={session?.user?.email === writerData?.email} postData={postData as Post} />
+        <PostHeaderMenu session={session} postData={postData as Post} />
       </div>
     </section>
   );

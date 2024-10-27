@@ -44,7 +44,11 @@ export interface TopNavMenu {
 export interface Room {
   _id?: ObjectId | string,
   title: string,
-  category?: string,
-  img?: string,
-  id: string,
+  content: string,
+  img: string,
+  id?: string,
+}
+
+export interface DmRoom extends Room {
+  member: string[],
 }
