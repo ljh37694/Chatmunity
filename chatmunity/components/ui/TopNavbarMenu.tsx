@@ -1,7 +1,7 @@
 'use client'
 
 import { TopNavMenu } from "@/types";
-import { faHome, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faMessage, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 import UserBUtton from "./UserButton";
@@ -12,7 +12,8 @@ export default function TopNavbarMenu() {
 
   const navMenuList: TopNavMenu[] = [
     { url: "/main", icon: faHome }, 
-    { url: '/write', icon: faPlus }, 
+    { url: '/write', icon: faPlus },
+    { url: '/dm', icon: faMessage },
   ];
 
   return (

@@ -15,6 +15,7 @@ export interface Chat {
 export interface Post {
   _id?: ObjectId | string,
   writer: string,
+  writerName: string,
   content: string,
   date: string,
   title: string,
@@ -51,5 +52,8 @@ export interface Room {
 
 export interface DmRoom {
   _id?: ObjectId | string,
-  member: string[],
+  member: {
+    email: string,
+    name: string,
+  }[],
 }

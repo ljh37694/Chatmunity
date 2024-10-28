@@ -12,7 +12,7 @@ import { useState } from 'react';
 interface Menu {
   icon: IconDefinition,
   text: string,
-  isWriterMenu: boolean,
+  show: boolean,
   onClick: React.MouseEventHandler,
 }
 
@@ -30,7 +30,7 @@ export default function PostHeaderMenu(props: Props) {
     {
       icon: faPen,
       text: "수정하기",
-      isWriterMenu: true,
+      show: true,
       onClick: (e: React.MouseEvent) => {
         router.push("/edit/" + props.postData._id);
       }
@@ -38,25 +38,31 @@ export default function PostHeaderMenu(props: Props) {
     {
       icon: faMessage,
       text: "DM",
-      isWriterMenu: false,
+      show: props.session?.user?.email !== props.postData.writer,
       onClick: () => {
-        axios({
-          method: "GET",
-          url: "/api/dmRoom",
-          headers: {
-            'Authorization': 'Bearer YOUR_TOKEN',
-            'Content-Type': 'application/json',
-            data: JSON.stringify([props.session?.user?.email, props.postData.writer]),
-          }
-        })
+        axios.get("/api/dmRoom?member=" + JSON.stringify([props.session?.user?.email, props.postData.writer]))
           .then((res) => {
             if (res.data) {
-              router.push("/dm/" + res.data);
+              router.push("/dm/" + res.data._id);
             } else {
-              axios.post<DmRoom>('/api/dmRoom', {
-                member: [props.postData.writer, props.session?.user?.email],
-              })
-                .then((res) => console.log(res.data))
+              const data: DmRoom = {
+                member: [
+                  {
+                    email: props.session?.user?.email as string,
+                    name: props.session?.user?.name as string,
+                  },
+                  {
+                    email: props.postData.writer,
+                    name: props.postData.writerName,
+                  },
+                ]
+              };
+
+              axios.post<DmRoom>('/api/dmRoom', data)
+                .then((res) => {
+                  console.log(res.data);
+                  router.push('/dm');
+                })
                 .catch(e => console.log(e));
             }
           })
@@ -76,7 +82,7 @@ export default function PostHeaderMenu(props: Props) {
         <section className={styles.modal}>
           {
             menuList.map((item, idx) => {
-              if (!item.isWriterMenu || (item.isWriterMenu && props.session?.user?.email === props.postData.writer)) {
+              if (item.show) {
                 return (
                   <label className={styles.menu} key={idx} onClick={item.onClick}>
                     <FontAwesomeIcon className={styles.icon} icon={item.icon} />

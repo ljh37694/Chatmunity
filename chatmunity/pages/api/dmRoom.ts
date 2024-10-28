@@ -1,5 +1,5 @@
 import { connectDB } from "@/app/utils/datadbase";
-import { Chat, DmRoom } from "@/types";
+import { DmRoom } from "@/types";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -7,28 +7,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const client = await connectDB;
     const db = client.db('Chatmunity');
 
-    let result = null;
-
     if (req.method === 'GET') {
-      const users = req.headers.data;
+      const users = JSON.parse(req.query.member as string);
 
-      result = await db.collection<DmRoom>('dmRoom').findOne({
+      const result = await db.collection<DmRoom>('dmRoom').findOne({
         member: {
-          $in: JSON.parse(users as string)
+          $all: [
+            { $elemMatch: { email: users[0] }},
+            { $elemMatch: { email: users[1] }},
+          ]
         }
       });
+
+      res.status(200).json(result);
     }
 
     else if (req.method === 'POST') {
-      result = await db.collection('dmRoom').insertOne(req.body);
-    }
-          
-    if (result) {
+      const result = await db.collection<DmRoom>('dmRoom').insertOne(req.body);
+
       res.status(200).json(result);
-    }
-    
-    else {
-      res.status(400).json({message: 'not found'});
     }
   } catch (e) {
     res.status(500).json(e);
