@@ -49,6 +49,7 @@ export interface Room {
   id?: string,
 }
 
-export interface DmRoom extends Room {
+export interface DmRoom {
+  _id?: ObjectId | string,
   member: string[],
 }

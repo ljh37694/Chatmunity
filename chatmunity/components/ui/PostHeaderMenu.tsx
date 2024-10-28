@@ -42,7 +42,7 @@ export default function PostHeaderMenu(props: Props) {
       onClick: () => {
         axios({
           method: "GET",
-          url: "/api/",
+          url: "/api/dmRoom",
           headers: {
             'Authorization': 'Bearer YOUR_TOKEN',
             'Content-Type': 'application/json',
@@ -53,10 +53,11 @@ export default function PostHeaderMenu(props: Props) {
             if (res.data) {
               router.push("/dm/" + res.data);
             } else {
-              axios.post<DmRoom>('/api/dm', {
-                title: 
+              axios.post<DmRoom>('/api/dmRoom', {
+                member: [props.postData.writer, props.session?.user?.email],
               })
-                .then()
+                .then((res) => console.log(res.data))
+                .catch(e => console.log(e));
             }
           })
           .catch((e) => console.log(e));
