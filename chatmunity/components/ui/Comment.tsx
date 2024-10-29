@@ -1,7 +1,7 @@
 'use client'
 
 import styles from '@/styles/ui/Comment.module.css';
-import { Chat } from '@/types';
+import { Chat, Post } from '@/types';
 import { Session } from 'next-auth';
 import { useEffect, useState } from 'react';
 import ReplyInput from './ReplyInput';
@@ -9,11 +9,12 @@ import axios from 'axios';
 
 interface Props {
   session: Session | null,
-  data: Chat,
+  chatData: Chat,
+  postData: Post,
 }
 
 export default function Comment(props: Props) {
-  const { data, session } = props;
+  const { chatData, postData, session } = props;
 
   const [showReply, setShowReply] = useState(false);
   const [replyChatList, setReplyChatList] = useState<Chat[]>([]);
@@ -27,7 +28,7 @@ export default function Comment(props: Props) {
   }
 
   useEffect(() => {
-    axios.get('/api/replyChat?root_chat=' + data._id)
+    axios.get('/api/replyChat?root_chat=' + chatData._id)
       .then((res) => {
         setReplyChatList(res.data);
       })
@@ -39,19 +40,19 @@ export default function Comment(props: Props) {
       <section className={styles.container}>
         <div className={styles.rootChat}>
           <div className={styles.chatContainer}>
-            <p className={`${styles.name} ${data.writer === data.email ? styles.writerName : ''}`}>{data.writer === data.email ? '작성자' : data.name}</p>
-            <p className={styles.content} onClick={onClickContent}>{data.content}</p>
+            <p className={`${styles.name} ${postData.writer === chatData.email ? styles.writerName : ''}`}>{postData.writer === chatData.email ? '작성자' : chatData.name}</p>
+            <p className={styles.content} onClick={onClickContent}>{chatData.content}</p>
           </div>
-          <p className={styles.date}>{new Date(data.date as string).getFullYear()}</p>
+          <p className={styles.date}>{new Date(chatData.date as string).getFullYear()}</p>
         </div>
 
         <div className={styles.replyContainer}>
-          {showReply ? <ReplyInput data={data} session={session} rootChatId={data._id?.toString() as string} callback={func} /> : null}
+          {showReply ? <ReplyInput data={chatData} session={session} rootChatId={chatData._id?.toString() as string} callback={func} /> : null}
 
           {replyChatList.map((item, idx) => {
             return (
               <div className={`${styles.chatContainer} ${styles.replyChat}`} key={idx}>
-                <p className={`${styles.name} ${item.writer === item.email ? styles.writerName : ''}`}>{item.writer === item.email ? '작성자' : item.name}</p>
+                <p className={`${styles.name} ${postData.writer === item.email ? styles.writerName : ''}`}>{postData.writer === item.email ? '작성자' : item.name}</p>
                 <p className={styles.content} onClick={onClickContent}>{item.content}</p>
               </div>
             );

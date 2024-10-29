@@ -33,7 +33,7 @@ export default async function PostDetail(props: Props) {
           { 
             chatList.map((item, idx) => {
               return (
-                <Comment data={item} session={session} key={idx} />
+                <Comment postData={postData as Post} chatData={item} session={session} key={idx} />
               );
             })
           }

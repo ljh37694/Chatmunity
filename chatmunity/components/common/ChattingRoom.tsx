@@ -13,16 +13,3 @@ export default function ChattingRoom (props: ChattingRoomProps) {
     </section>
   );
 }
-
-interface ChattingProps {
-  isWriter?: boolean,
-  text: string,
-}
-
-export function Chatting (props: ChattingProps) {
-  return (
-    <div className={`${styles.post} ${props.isWriter ? styles.hotPost : ''}`}>
-      <p className={styles.content}>{props.text}</p>
-    </div>
-  );
-}
