@@ -6,15 +6,16 @@ import { useRouter } from 'next/navigation';
 
 interface Props {
   data: Room,
+  url: string,
 }
 
 export default function RoomItem(props: Props) {
-  const { data } = props;
+  const { data, url } = props;
   const router = useRouter();
 
   return (
     <div className={styles.roomContainer} onClick={() => {
-      router.push('/room/' + data.id);
+      router.push(url);
     }}>
       <div>
         <img className={styles.roomImg} src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png' />

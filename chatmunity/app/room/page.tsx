@@ -24,7 +24,7 @@ export default async function RoomPage() {
       {
         roomList.map((item, idx) => {
           return (
-            <RoomItem data={item} key={idx} />
+            <RoomItem url={'/room/' + item.id} data={item} key={idx} />
           );
         })
       }

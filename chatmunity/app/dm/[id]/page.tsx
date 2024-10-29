@@ -15,9 +15,11 @@ export default async function DM(props: Props) {
   const client = await connectDB;
   const db = client.db('Chatmunity');
 
+  const dmList = db.collection('dm').find({})
+
   return (
     <div>
-      hi
+      
     </div>
   );
 }

@@ -20,20 +20,19 @@ export default async function DM(props: Props) {
   const dmRoomList: DmRoom[] = await db.collection<DmRoom>('dmRoom').find({ member: { $elemMatch: { email: session?.user?.email } } }).toArray();
   const roomList: Room[] = dmRoomList.map((item): Room => {
     return {
+      _id: item._id,
       title: session?.user?.email === item.member[0].email ? item.member[1].name : item.member[0].name,
       content: "asdfasdf",
       img: "https://talkimg.imbc.com/TVianUpload/tvian/TViews/image/2023/05/18/da5c3b77-a0ce-4c18-b016-1b2a23ee4846.jpg",
     }
   });
 
-  console.log(dmRoomList);
-
   return (
     <div>
       {
         roomList.map((item, idx) => {
           return (
-            <RoomItem data={item} key={idx} />
+            <RoomItem url={'/dm/' + item._id} data={item} key={idx} />
           );
         })
       }
