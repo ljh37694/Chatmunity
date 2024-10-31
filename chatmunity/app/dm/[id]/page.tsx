@@ -3,8 +3,7 @@ import styles from './page.module.css';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { connectDB } from '@/app/utils/datadbase';
 import { Dm } from '@/types';
-import ChattingRoom from '@/components/common/ChattingRoom';
-import Chatting from '@/components/ui/Chatting';
+import DmRoom from '@/components/layout/DmRoom';
 
 interface Props {
   params: {
@@ -22,15 +21,7 @@ export default async function DM(props: Props) {
 
   return (
     <div>
-      <ChattingRoom title='hi' chatList={dmList}>
-        {
-          dmList.map((item, idx) => {
-            return (
-              <Chatting chatData={item} isWriter={item.writer === session?.user?.email} />
-            )
-          })
-        }
-      </ChattingRoom>
+      <DmRoom session={session} dmList={dmList} title='HI' />
     </div>
   );
 }

@@ -6,13 +6,12 @@ import Input from './Input';
 import { useState } from 'react';
 
 interface ChattingRoomProps {
-  chatList: Chat[],
   children: React.ReactNode,
   title: string,
 }
 
 export default function ChattingRoom (props: ChattingRoomProps) {
-  const { chatList, title } = props;
+  const { title } = props;
 
   const [text, setText] = useState<string>('');
 
@@ -22,10 +21,6 @@ export default function ChattingRoom (props: ChattingRoomProps) {
         <h2>{title}</h2>
       </div>
       { props.children }
-
-      <Input buttonText='보내기' textState={text} setText={setText} onSubmit={(e) => {
-        e.preventDefault();
-      }} />
     </section>
   );
 }
