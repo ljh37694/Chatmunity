@@ -3,13 +3,13 @@ import Button from "../common/Button";
 import styles from '@/styles/ui/ReplyInput.module.css';
 import axios from "axios";
 import { Session } from "next-auth";
-import { Chat } from "@/types";
+import { CommentType } from "@/types";
 
 interface Props {
   session: Session | null,
-  data: Chat,
+  data: CommentType,
   rootChatId: string,
-  callback: (chat: Chat) => void,
+  callback: (CommentType: CommentType) => void,
 }
 
 export default function ReplyInput(props: Props) {
@@ -25,23 +25,21 @@ export default function ReplyInput(props: Props) {
     }
 
     else {
-      const chat: Chat = {
+      const comment: CommentType = {
         date: new Date().toISOString(),
         content: text,
-        email: session?.user?.email as string,
         name: session?.user?.name as string,
         post_id: data.post_id,
         writer: session?.user?.email as string,
         root_chat: rootChatId,
       };
 
-      axios.post('/api/replyChat', chat)
+      axios.post('/api/replyComment', comment)
         .then((res) => {
           setText('');
           callback({
             date: new Date().toISOString(),
             content: text,
-            email: session?.user?.email as string,
             name: session?.user?.name as string,
             post_id: data.post_id,
             writer: session?.user?.email as string,

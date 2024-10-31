@@ -53,7 +53,7 @@ export default function PostHeaderMenu(props: Props) {
                   },
                   {
                     email: props.postData.writer,
-                    name: props.postData.writerName,
+                    name: props.postData.writer,
                   },
                 ]
               };

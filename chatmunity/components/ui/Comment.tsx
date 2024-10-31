@@ -28,7 +28,7 @@ export default function Comment(props: Props) {
   }
 
   useEffect(() => {
-    axios.get('/api/replyChat?root_chat=' + commentData._id)
+    axios.get('/api/replyComment?root_chat=' + commentData._id)
       .then((res) => {
         setReplyChatList(res.data);
       })

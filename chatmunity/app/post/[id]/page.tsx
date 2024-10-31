@@ -29,15 +29,13 @@ export default async function PostDetail(props: Props) {
       <p className={styles.content}>{postData?.content}</p>
       <div className={styles.commentContainer}>
         <CommentInput session={session} postId={props.params.id} />
-        <ChattingRoom chatList={commentList}>
-          { 
-            commentList.map((item, idx) => {
-              return (
-                <Comment postData={postData as Post} commentData={item} session={session} key={idx} />
-              );
-            })
-          }
-        </ChattingRoom>
+        { 
+          commentList.map((item, idx) => {
+            return (
+              <Comment postData={postData as Post} commentData={item} session={session} key={idx} />
+            );
+          })
+        }
       </div>
     </div>
   );
