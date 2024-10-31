@@ -1,6 +1,5 @@
 import { connectDB } from "@/app/utils/datadbase";
-import { Chat } from "@/types";
-import { ObjectId } from "mongodb";
+import { CommentType } from "@/types";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -16,12 +15,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (req.method === 'GET') {
       if (typeof root_chat === 'string') {
-        result = await db.collection<Chat>('reply').find({ root_chat: root_chat }).toArray();
+        result = await db.collection<CommentType>('reply').find({ root_chat: root_chat }).toArray();
       }
     }
 
     else if (req.method === 'POST') {
-      result = await db.collection<Chat>('reply').insertOne(req.body);
+      result = await db.collection<CommentType>('reply').insertOne(req.body);
     }
           
     if (result) {

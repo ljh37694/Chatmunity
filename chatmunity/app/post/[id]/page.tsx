@@ -1,4 +1,4 @@
-import { Chat, Post, UserData } from '@/types';
+import { Chat, CommentType, Post, UserData } from '@/types';
 import styles from './page.module.css';
 import { connectDB } from '@/app/utils/datadbase';
 import { ObjectId } from 'mongodb';
@@ -20,7 +20,7 @@ export default async function PostDetail(props: Props) {
   const session = await getServerSession(authOptions);
   
   const postData = await db.collection<Post>('post').findOne({ _id: new ObjectId(props.params.id)});
-  const chatList = await db.collection<Chat>('chat').find({ post_id: props.params.id }).toArray();
+  const commentList = await db.collection<CommentType>('comment').find({ post_id: props.params.id }).toArray();
 
   return (
     <div className={styles.container}>
@@ -29,11 +29,11 @@ export default async function PostDetail(props: Props) {
       <p className={styles.content}>{postData?.content}</p>
       <div className={styles.commentContainer}>
         <CommentInput session={session} postId={props.params.id} />
-        <ChattingRoom chatList={chatList}>
+        <ChattingRoom chatList={commentList}>
           { 
-            chatList.map((item, idx) => {
+            commentList.map((item, idx) => {
               return (
-                <Comment postData={postData as Post} chatData={item} session={session} key={idx} />
+                <Comment postData={postData as Post} commentData={item} session={session} key={idx} />
               );
             })
           }

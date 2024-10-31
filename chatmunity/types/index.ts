@@ -3,12 +3,14 @@ import { ObjectId } from "mongodb";
 
 export interface Chat {
   _id?: ObjectId | string,
-  email: string,
   content: string,
   date: string,
-  post_id: string,
   name: string,
   writer: string,
+}
+
+export interface CommentType extends Chat {
+  post_id: string,
   root_chat: string | null,
 }
 
@@ -56,4 +58,8 @@ export interface DmRoom {
     email: string,
     name: string,
   }[],
+}
+
+export interface Dm extends Chat {
+  roomId: string,
 }

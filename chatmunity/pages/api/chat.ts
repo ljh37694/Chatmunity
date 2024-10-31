@@ -1,5 +1,5 @@
 import { connectDB } from "@/app/utils/datadbase";
-import { Chat } from "@/types";
+import { CommentType } from "@/types";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -15,12 +15,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (req.method === 'GET') {
       if (typeof postId === 'string') {
-        result = await db.collection<Chat>('chat').find({ post_id: postId, root_chat: null }).toArray();
+        result = await db.collection<CommentType>('comment').find({ post_id: postId, root_chat: null }).toArray();
       }
     }
 
     else if (req.method === 'POST') {
-      result = await db.collection<Chat>('chat').insertOne(req.body);
+      result = await db.collection<CommentType>('comment').insertOne(req.body);
     }
           
     if (result) {
