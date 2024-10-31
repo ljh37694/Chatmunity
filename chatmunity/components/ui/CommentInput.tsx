@@ -4,7 +4,7 @@ import styles from '@/styles/ui/CommentInput.module.css';
 import { Session } from 'next-auth';
 import { FormEvent, useState } from 'react';
 import Button from '../common/Button';
-import { Chat } from '@/types';
+import { CommentType } from '@/types';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default function CommentInput(props: Props) {
-  const { session } = props;
+  const { session, postId } = props;
 
   const router = useRouter();
   const [text, setText] = useState<string>('');
@@ -29,14 +29,13 @@ export default function CommentInput(props: Props) {
     if (!props.session?.user) {
       alert('댓글을 작성하려면 로그인을 해주십시오');
     } else {
-      const chat: Chat = {
+      const chat: CommentType = {
         content: text,
         date: new Date().toString(),
-        email: props.session?.user!.email as string,
-        post_id: props.postId,
+        writer: props.session?.user!.email as string,
         name: props.session.user.name as string,
-        writer: props.session.user.email as string,
         root_chat: null,
+        post_id: postId,
       }
       
       axios.post('/api/chat', chat)

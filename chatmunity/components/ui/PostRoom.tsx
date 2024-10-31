@@ -30,7 +30,6 @@ export default function PostRoom(props: Props) {
 
         <PostInput className={styles.input} roomId={roomData?.id as string} />
       </div>
-
     </div>
   );
 }

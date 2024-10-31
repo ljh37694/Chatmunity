@@ -14,12 +14,7 @@ export interface CommentType extends Chat {
   root_chat: string | null,
 }
 
-export interface Post {
-  _id?: ObjectId | string,
-  writer: string,
-  writerName: string,
-  content: string,
-  date: string,
+export interface Post extends Chat {
   title: string,
   views: number,
   likes: number,
@@ -30,7 +25,7 @@ export interface UserData {
   name: string,
   email: string,
   image: string,
-  createdAt: string,
+  created_at: string,
 }
 
 export interface Profile {
@@ -61,5 +56,5 @@ export interface DmRoom {
 }
 
 export interface Dm extends Chat {
-  roomId: string,
+  room_id: string,
 }

@@ -1,14 +1,17 @@
-import styles from '@/styles/common/ChattingRoom/Chatting.module.css';
+import styles from '@/styles/ui/Chatting.module.css';
+import { Chat } from '@/types';
 
 interface Props {
-  isWriter?: boolean,
-  text: string,
+  chatData: Chat,
+  isWriter: boolean,
 }
 
 export default function Chatting(props: Props) {
+  const { chatData, isWriter } = props;
+
   return (
-    <div className={`${styles.post} ${props.isWriter ? styles.hotPost : ''}`}>
-      <p className={styles.content}>{props.text}</p>
+    <div className={`${styles.chat} ${isWriter ? styles.otherChat : ''}`}>
+      <p className={styles.content}>{chatData.content}</p>
     </div>
   );
 }

@@ -48,7 +48,7 @@ export default function Write(props: Props) {
         likes: 0,
         views: 0,
         writer: session?.user!.email as string,
-        writerName: session?.user?.name as string,
+        name: session?.user?.name as string,
         date: new Date().toString(),
         room_id: props.params.title,
       };

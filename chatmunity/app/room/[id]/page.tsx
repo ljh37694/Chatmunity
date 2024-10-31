@@ -16,6 +16,7 @@ export default async function RoomDetail(props: Props) {
   const postList = await db.collection<Post>('post').find({
     room_id: props.params.id,
   }).toArray();
+  
   const roomData = await db.collection<Room>('room').findOne({ id: props.params.id });
 
   return (
