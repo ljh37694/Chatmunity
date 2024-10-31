@@ -1,10 +1,9 @@
-import { Chat, CommentType, Post, UserData } from '@/types';
+import { CommentType, Post } from '@/types';
 import styles from './page.module.css';
 import { connectDB } from '@/app/utils/datadbase';
 import { ObjectId } from 'mongodb';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
-import ChattingRoom from '@/components/common/ChattingRoom';
 import CommentInput from '@/components/ui/CommentInput';
 import Comment from '@/components/ui/Comment';
 import PostHeader from '@/components/ui/PostHeader';
