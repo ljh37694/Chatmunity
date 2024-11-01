@@ -3,7 +3,7 @@ import styles from './page.module.css';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { connectDB } from '@/app/utils/datadbase';
 import RoomItem from '@/components/ui/RoomItem';
-import { DmRoom, Room, UserData } from '@/types';
+import { Dm, DmRoom, Room, UserData } from '@/types';
 
 interface Props {
   params: {
@@ -24,10 +24,12 @@ export default async function DM(props: Props) {
         email: session?.user?.email !== item.member[0].email ? item.member[0].email : item.member[1].email,
       });
 
+      const lastDm = await db.collection<Dm>('dm').findOne();
+
       const data = {
         _id: item._id,
         title: session?.user?.email !== item.member[0].email ? item.member[0].name : item.member[1].name,
-        content: "HELLO",
+        content: lastDm?.content as string,
         img: session?.user?.email === item.member[0].email ? session.user.image as string : other!.image as string,
       };
 

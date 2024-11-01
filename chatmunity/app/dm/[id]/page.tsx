@@ -21,7 +21,7 @@ export default async function DM(props: Props) {
 
   return (
     <div>
-      <DmRoom session={session} dmList={dmList} title='HI' />
+      <DmRoom session={session} dmList={dmList} title='HI' roomId={props.params.id} />
     </div>
   );
 }
