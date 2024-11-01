@@ -44,7 +44,10 @@ export interface Room {
   title: string,
   content: string,
   img: string,
-  id?: string,
+}
+
+export interface PostRoom extends Room {
+  id: string,
 }
 
 export interface DmRoom {

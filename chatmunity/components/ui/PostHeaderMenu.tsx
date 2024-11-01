@@ -1,7 +1,7 @@
 'use client'
 
 import styles from '@/styles/ui/PostHeaderMenu.module.css';
-import { DmRoom, Post } from '@/types';
+import { DmRoom, Post, UserData } from '@/types';
 import { faEllipsisVertical, faMessage, faPen, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
@@ -18,10 +18,12 @@ interface Menu {
 
 interface Props {
   postData: Post,
+  writerData: UserData,
   session: Session | null,
 }
 
 export default function PostHeaderMenu(props: Props) {
+  const { session, postData, writerData } = props;
   const [show, setShow] = useState<boolean>(false);
 
   const router = useRouter();
@@ -32,15 +34,15 @@ export default function PostHeaderMenu(props: Props) {
       text: "수정하기",
       show: true,
       onClick: (e: React.MouseEvent) => {
-        router.push("/edit/" + props.postData._id);
+        router.push("/edit/" + postData._id);
       }
     },
     {
       icon: faMessage,
       text: "DM",
-      show: props.session?.user?.email !== props.postData.writer,
+      show: session?.user?.email !== postData.writer,
       onClick: () => {
-        axios.get("/api/dmRoom?member=" + JSON.stringify([props.session?.user?.email, props.postData.writer]))
+        axios.get("/api/dmRoom?member=" + JSON.stringify([session?.user?.email, postData.writer]))
           .then((res) => {
             if (res.data) {
               router.push("/dm/" + res.data._id);
@@ -48,12 +50,12 @@ export default function PostHeaderMenu(props: Props) {
               const data: DmRoom = {
                 member: [
                   {
-                    email: props.session?.user?.email as string,
-                    name: props.session?.user?.name as string,
+                    email: session?.user?.email as string,
+                    name: session?.user?.name as string,
                   },
                   {
-                    email: props.postData.writer,
-                    name: props.postData.writer,
+                    email: postData.writer,
+                    name: postData.writer,
                   },
                 ]
               };

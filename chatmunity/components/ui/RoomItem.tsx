@@ -18,7 +18,7 @@ export default function RoomItem(props: Props) {
       router.push(url);
     }}>
       <div>
-        <img className={styles.roomImg} src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png' />
+        <img className={styles.roomImg} src={data.img ? data.img : "https://isobarscience-1bfd8.kxcdn.com/wp-content/uploads/2020/09/default-profile-picture1.jpg"} />
       </div>
       <div>
         <h3 className={styles.title}>{data.title}</h3>

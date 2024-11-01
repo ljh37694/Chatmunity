@@ -1,8 +1,6 @@
 'use client'
 
 import styles from '@/styles/common/ChattingRoom.module.css';
-import { Chat } from '@/types';
-import Input from './Input';
 import { useState } from 'react';
 
 interface ChattingRoomProps {
