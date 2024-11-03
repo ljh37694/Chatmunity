@@ -1,7 +1,7 @@
 import PostRoom from "@/components/ui/PostRoom";
 import styles from "./page.module.css";
 import { connectDB } from "@/app/utils/datadbase";
-import { Post, Room } from "@/types";
+import { Post, PostRoomType } from "@/types";
 
 interface Props {
   params: {
@@ -17,7 +17,7 @@ export default async function RoomDetail(props: Props) {
     room_id: props.params.id,
   }).toArray();
   
-  const roomData = await db.collection<Room>('room').findOne({ id: props.params.id });
+  const roomData = await db.collection<PostRoomType>('room').findOne({ id: props.params.id });
 
   return (
     <div className={styles.container}>

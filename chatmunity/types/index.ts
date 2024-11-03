@@ -46,7 +46,7 @@ export interface Room {
   img: string,
 }
 
-export interface PostRoom extends Room {
+export interface PostRoomType extends Room {
   id: string,
 }
 
