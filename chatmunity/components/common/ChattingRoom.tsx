@@ -6,6 +6,7 @@ import { useState } from 'react';
 interface ChattingRoomProps {
   children: React.ReactNode,
   title: string,
+  className?: string,
 }
 
 export default function ChattingRoom (props: ChattingRoomProps) {
@@ -14,11 +15,14 @@ export default function ChattingRoom (props: ChattingRoomProps) {
   const [text, setText] = useState<string>('');
 
   return (
-    <section className={styles.container}>
+    <section className={`${styles.container} ${props.className}`}>
       <div className={styles.header}>
         <h2>{title}</h2>
       </div>
-      { props.children }
+
+      <div className={styles.content}>
+        { props.children }
+      </div>
     </section>
   );
 }

@@ -3,7 +3,10 @@ import styles from './page.module.css';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { connectDB } from '@/app/utils/datadbase';
 import { Dm } from '@/types';
-import DmRoom from '@/components/layout/DmRoom';
+import ChattingRoom from '@/components/common/ChattingRoom';
+import ChattingList from '@/components/common/ChattingList';
+import DmInput from '@/components/ui/DmInput';
+import Chatting from '@/components/ui/Chatting';
 
 interface Props {
   params: {
@@ -12,16 +15,26 @@ interface Props {
 }
 
 export default async function DM(props: Props) {
+  const { params: { id: roomId} } = props;
+  
   const session = await getServerSession(authOptions);
 
   const client = await connectDB;
   const db = client.db('Chatmunity');
 
-  const dmList: Dm[] = await db.collection<Dm>('dm').find({ roomId: props.params.id }).toArray();
+  const dmList: Dm[] = await db.collection<Dm>('dm').find<Dm>({ room_id: roomId }).toArray();
 
   return (
-    <div>
-      <DmRoom session={session} dmList={dmList} title='HI' roomId={props.params.id} />
-    </div>
+    <ChattingRoom title={"HI"}>
+      <ChattingList inputComp={<DmInput roomId={roomId} session={session} />}>
+        {
+          dmList.map((item, idx) => {
+            return (
+              <Chatting chatData={item} isOtherChat={item.writer !== session?.user?.email} key={idx} />
+            );
+          })
+        }
+      </ChattingList>
+    </ChattingRoom>
   );
 }

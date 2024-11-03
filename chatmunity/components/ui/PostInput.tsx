@@ -7,7 +7,7 @@ import { useRef, useState } from 'react';
 
 interface Props {
   roomId: string,
-  className: string,
+  className?: string,
 }
 
 export default function PostInput(props: Props) {

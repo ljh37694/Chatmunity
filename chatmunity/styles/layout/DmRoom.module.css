@@ -1,0 +1,9 @@
+.dmList {
+  flex-grow: 1;
+  height: 100px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}

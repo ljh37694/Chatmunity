@@ -5,13 +5,7 @@ import { connectDB } from '@/app/utils/datadbase';
 import RoomItem from '@/components/ui/RoomItem';
 import { Dm, DmRoom, Room, UserData } from '@/types';
 
-interface Props {
-  params: {
-    id: string,
-  }
-}
-
-export default async function DM(props: Props) {
+export default async function DM() {
   const session = await getServerSession(authOptions);
 
   const client = await connectDB;
@@ -40,9 +34,18 @@ export default async function DM(props: Props) {
   return (
     <div>
       {
-        roomList.map((item, idx) => {
+        roomList.map(async (item, idx) => {
+          const lastDm = await db.collection<Dm>('dm').findOne({ room_id: item._id as string });
+
+          const data: Room = {
+            ...item,
+            content: lastDm?.content as string,
+          }
+
+          console.log(lastDm);
+
           return (
-            <RoomItem url={'/dm/' + item._id} data={item} key={idx} />
+            <RoomItem url={'/dm/' + item._id} data={data} key={idx} />
           );
         })
       }

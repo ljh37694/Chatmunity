@@ -10,9 +10,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     let result = null;
 
     if (req.method === 'GET') {
+      const limit: number = 30;
+
       const result = await db.collection<Dm>('dm').find({
         room_id: req.query.room_id,
       })
+      .sort({ timestamp: -1 })
+      .skip(parseInt(req.query.count as string) * limit)
+      .limit(limit)
+      .toArray();
+
+      res.status(200).json(result);
     }
 
     else if (req.method === 'POST') {

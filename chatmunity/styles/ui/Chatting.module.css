@@ -1,11 +1,29 @@
 .chat {
-
-}
-
-.otherChat {
-  color: aqua;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: right;
 }
 
 .content {
+  font-family: 'Paperlogy-5Medium';
+  background-color: #eee;
+  padding: 10px;
+  height: 100%;
+  display: inline-block;
+  border-radius: 10px;
+  max-width: 60%;
+}
 
+.otherChat {
+  justify-content: left;
+
+  & > * {
+    background-color: aqua;
+  }
+}
+
+.url {
+  cursor: pointer;
+  user-select: none;
 }
