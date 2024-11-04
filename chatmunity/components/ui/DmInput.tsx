@@ -5,6 +5,7 @@ import Input from "../common/Input";
 import { useState } from "react";
 import { Session } from "next-auth";
 import { Dm } from "@/types";
+import { useRouter } from "next/navigation";
 
 interface Props {
   session: Session | null,
@@ -15,6 +16,7 @@ export default function DmInput(props: Props) {
   const { session, roomId } = props;
 
   const [text, setText] = useState<string>('');
+  const router = useRouter();
 
   return (
     <Input buttonText='보내기' textState={text} setText={setText} onSubmit={(e) => {
@@ -31,6 +33,8 @@ export default function DmInput(props: Props) {
       axios.post('/api/dm', dm)
         .then((res) => {
           console.log(res);
+          setText('');
+          router.refresh();
         })
         .catch(e => console.log(e));
     }} />
