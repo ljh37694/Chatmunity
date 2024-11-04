@@ -2,7 +2,7 @@ import { getServerSession } from 'next-auth';
 import styles from './page.module.css';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { connectDB } from '@/app/utils/datadbase';
-import { Dm } from '@/types';
+import { Chat, Dm } from '@/types';
 import ChattingRoom from '@/components/common/ChattingRoom';
 import ChattingList from '@/components/common/ChattingList';
 import DmInput from '@/components/ui/DmInput';
@@ -28,9 +28,13 @@ export default async function DM(props: Props) {
     <ChattingRoom title={"HI"}>
       <ChattingList inputComp={<DmInput roomId={roomId} session={session} />}>
         {
-          dmList.map((item, idx) => {
+          dmList.map(async (item, idx) => {            
+            const data: Chat = {
+              ...item,
+              _id: item._id?.toString(),
+            }
             return (
-              <Chatting chatData={item} isOtherChat={item.writer !== session?.user?.email} key={idx} />
+              <Chatting chatData={data} isOtherChat={item.writer !== session?.user?.email} key={idx} />
             );
           })
         }

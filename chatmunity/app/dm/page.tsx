@@ -12,34 +12,24 @@ export default async function DM() {
   const db = client.db('Chatmunity');
 
   const dmRoomList: DmRoom[] = await db.collection<DmRoom>('dmRoom').find({ member: { $elemMatch: { email: session?.user?.email } } }).toArray();
-  const roomList: Room[] = await Promise.all(
-    dmRoomList.map(async (item) => {
-      const other = await db.collection<UserData>('user').findOne({
-        email: session?.user?.email !== item.member[0].email ? item.member[0].email : item.member[1].email,
-      });
-
-      const lastDm = await db.collection<Dm>('dm').findOne();
-
-      const data = {
-        _id: item._id,
-        title: session?.user?.email !== item.member[0].email ? item.member[0].name : item.member[1].name,
-        content: lastDm?.content as string,
-        img: session?.user?.email === item.member[0].email ? session.user.image as string : other!.image as string,
-      };
-
-      return data;
-    })
-  );
 
   return (
     <div>
       {
-        roomList.map(async (item, idx) => {
-          const lastDm = await db.collection<Dm>('dm').findOne({ room_id: item._id as string });
+        dmRoomList.map(async (item, idx) => {
+          const lastDm = await db.collection<Dm>('dm').findOne({ room_id: item._id?.toString() }, { sort: { date: -1 }});
+          const otherUser = await db.collection<UserData>('user').findOne({
+           email: item.member[0].email === session?.user?.email ? item.member[1].email : item.member[0].email,
+          });
+
+          console.log(item._id);
 
           const data: Room = {
             ...item,
             content: lastDm?.content as string,
+            img: otherUser?.image as string,
+            title: otherUser?.name as string,
+            _id: item._id?.toString(),
           }
 
           console.log(lastDm);
