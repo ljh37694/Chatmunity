@@ -17,5 +17,19 @@ export async function middleware(req: NextRequest) {
 
       return NextResponse.next();
     }
+  } 
+  
+  else if (curUrl.startsWith('/dm')) {
+    const token = await getToken({ req, secret: process.env.JWT_SECRET });
+
+    if (token === null) {
+      return NextResponse.redirect(new URL('/api/auth/signin', req.url));
+    }
+
+    else {
+      console.log(token);
+
+      return NextResponse.next();
+    }
   }
 }
