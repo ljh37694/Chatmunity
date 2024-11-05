@@ -17,9 +17,7 @@ interface Props {
   }
 }
 
-let socket: Socket<ServerToClientEvents, ClientToServerEvents>;
-
-export default async function DM(props: Props) {
+export default async function DmPage(props: Props) {
   const { params: { id: roomId } } = props;
   
   const session = await getServerSession(authOptions);

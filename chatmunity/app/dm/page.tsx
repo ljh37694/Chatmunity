@@ -17,12 +17,11 @@ export default async function DM() {
     <div>
       {
         dmRoomList.map(async (item, idx) => {
-          const lastDm = await db.collection<Dm>('dm').findOne({ room_id: item._id?.toString() }, { sort: { date: -1 }});
+          const lastDm = await db.collection<Dm>('dm').findOne<Dm>({ room_id: item._id?.toString() }, { sort: { date: -1 }});
+
           const otherUser = await db.collection<UserData>('user').findOne({
            email: item.member[0].email === session?.user?.email ? item.member[1].email : item.member[0].email,
           });
-
-          console.log(item._id);
 
           const data: Room = {
             ...item,

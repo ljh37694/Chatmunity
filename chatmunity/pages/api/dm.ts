@@ -1,8 +1,9 @@
 import { connectDB } from "@/app/utils/datadbase";
 import { Dm } from "@/types";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest } from "next";
+import { NextApiResponseServerIo } from "./socket";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: NextApiRequest, res: NextApiResponseServerIo) {
   try {
     const client = await connectDB;
     const db = client.db('Chatmunity');
@@ -25,6 +26,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     else if (req.method === 'POST') {
       const result = await db.collection<Dm>('dm').insertOne(req.body);
+
+      const message: Dm = JSON.parse(req.body);
+
+      res.socket.server.io.emit('message', message.content);
 
       res.status(200).json(result);
     }
