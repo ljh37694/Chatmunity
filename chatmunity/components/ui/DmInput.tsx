@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import Input from "../common/Input";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Session } from "next-auth";
 import { Dm } from "@/types";
 import { useRouter } from "next/navigation";
@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 interface Props {
   session: Session | null,
   roomId: string,
+  setDmList: Dispatch<SetStateAction<Dm[]>>,
 }
 
 export default function DmInput(props: Props) {

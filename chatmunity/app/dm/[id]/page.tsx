@@ -1,45 +1,65 @@
-import { getServerSession } from 'next-auth';
+'use client'
+
 import styles from './page.module.css';
-import { authOptions } from '@/pages/api/auth/[...nextauth]';
-import { connectDB } from '@/app/utils/datadbase';
-import { Chat, Dm, DmRoom } from '@/types';
+import { Chat, Dm, DmRoom, UserData } from '@/types';
 import ChattingRoom from '@/components/common/ChattingRoom';
 import ChattingList from '@/components/common/ChattingList';
 import DmInput from '@/components/ui/DmInput';
 import Chatting from '@/components/ui/Chatting';
-import { ObjectId } from 'mongodb';
-import { Socket } from 'socket.io-client';
-import { ClientToServerEvents, ServerToClientEvents } from '@/types/socket';
-
+import { useSession } from 'next-auth/react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useSocketIo } from '@/components/provider/SocketIoProvider';
+  
 interface Props {
   params: {
     id: string,
   }
 }
 
-export default async function DmPage(props: Props) {
+export default function DmPage(props: Props) {
   const { params: { id: roomId } } = props;
   
-  const session = await getServerSession(authOptions);
+  const { data: session } = useSession();
+  const { socket } = useSocketIo();
 
-  const client = await connectDB;
-  const db = client.db('Chatmunity');
+  const [dmList, setDmList] = useState<Dm[]>([]);
+  const [dmRoomData, setDmRoomData] = useState<DmRoom>();
+  const [otherUser, setOtherUser] = useState<UserData>();
 
-  const dmList: Dm[] = await db.collection<Dm>('dm').find<Dm>({ room_id: roomId }).toArray();
+  useEffect(() => {
+    axios.get('/api/dm?room_id=' + roomId)
+      .then((res) => {
+        setDmList(res.data);
+      })
+      .catch(e => console.log(e));
 
-  const roomData = await db.collection<DmRoom>('dmRoom').findOne({ _id: new ObjectId(roomId) });
+    axios.get('/api/dmRoom?room_id=' + roomId)
+      .then((res) => {
+        setDmRoomData(res.data);
+        setOtherUser(res.data?.member[0].email === session?.user?.email ? res.data?.member[1] as UserData : res.data?.member[0] as UserData)
+      })
+      .catch(e => console.log(e));
 
-  const otherUser = roomData?.member[0].email === session?.user?.email ? roomData?.member[1] : roomData?.member[0];
+    
+  }, []);
+
+  useEffect(() => {
+    socket?.on('message', (msg) => {
+      
+    })
+  }, [socket]);
 
   return (
-    <ChattingRoom title={otherUser!.name}>
-      <ChattingList inputComp={<DmInput roomId={roomId} session={session} />}>
+    <ChattingRoom title={otherUser?.name as string}>
+      <ChattingList inputComp={<DmInput roomId={roomId} session={session} setDmList={setDmList} />}>
         {
-          dmList.map(async (item, idx) => {            
+          dmList.map(async (item, idx) => {
             const data: Chat = {
               ...item,
               _id: item._id?.toString(),
             }
+
             return (
               <Chatting chatData={data} isOtherChat={item.writer !== session?.user?.email} key={idx} />
             );

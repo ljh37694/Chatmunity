@@ -8,7 +8,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const client: MongoClient = await connectDB;
     const db: Db = client.db('Chatmunity');
 
-    if (req.method === "POST") {
+    if (req.method === "GET") {
+      const result = await db.collection<Room>('room').findOne<Room>({ _id: req.query.room_id });
+
+      res.status(200).json(result);
+    }
+
+    else if (req.method === "POST") {
       const result = await db.collection<Room>('room').findOne({ id: req.body.id });
       console.log(result);
 

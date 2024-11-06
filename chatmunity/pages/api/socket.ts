@@ -2,7 +2,7 @@ import { Server as NetServer } from "http";
 import { Server as SocketIOServer } from "socket.io";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Server } from "socket.io";
-import { ClientToServerEvents, ServerToClientEvents, SocketData } from "@/types/socket";
+import { ClientToServerEvents, ServerToClientEvents } from "@/types/socket";
 
 export type NextApiResponseServerIo = NextApiResponse & {
   socket: {

@@ -20,7 +20,7 @@ export default async function DM() {
           const lastDm = await db.collection<Dm>('dm').findOne<Dm>({ room_id: item._id?.toString() }, { sort: { date: -1 }});
 
           const otherUser = await db.collection<UserData>('user').findOne({
-           email: item.member[0].email === session?.user?.email ? item.member[1].email : item.member[0].email,
+            email: item.member[0].email === session?.user?.email ? item.member[1].email : item.member[0].email,
           });
 
           const data: Room = {
@@ -30,8 +30,6 @@ export default async function DM() {
             title: otherUser?.name as string,
             _id: item._id?.toString(),
           }
-
-          console.log(lastDm);
 
           return (
             <RoomItem url={'/dm/' + item._id} data={data} key={idx} />
