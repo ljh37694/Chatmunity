@@ -72,7 +72,7 @@ p, input, textarea {
   height: calc(100% - 70px);
 }
 
-.main-container {
+#main-container {
   max-width: 50%;
   min-width: 350px;
   margin: 0 auto;

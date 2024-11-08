@@ -29,7 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <main id="main-panel">
-          <div className="main-container">
+          <div id="main-container">
             {children}
           </div>
           <Backdrop />
