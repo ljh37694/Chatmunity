@@ -1,9 +1,8 @@
 import { connectDB } from "@/app/utils/datadbase";
 import { Dm } from "@/types";
-import { NextApiRequest } from "next";
-import { NextApiResponseServerIo } from "./socket";
+import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponseServerIo) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const client = await connectDB;
     const db = client.db('Chatmunity');
@@ -11,12 +10,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponseS
     let result = null;
 
     if (req.method === 'GET') {
-      const limit: number = 30;
+      const limit: number = 20;
 
       const result = await db.collection<Dm>('dm').find({
         room_id: req.query.room_id,
       })
-      .sort({ date: -1 })
+      .sort({ _id: -1 })
       .skip(parseInt(req.query.count as string) * limit)
       .limit(limit)
       .toArray();
@@ -26,8 +25,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponseS
 
     else if (req.method === 'POST') {
       const result = await db.collection<Dm>('dm').insertOne(req.body);
-      res.socket.server.io.to(req.query.room_id as string).emit('message', req.body);
-
       res.status(200).json(result);
     }
           

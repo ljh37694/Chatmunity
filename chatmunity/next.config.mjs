@@ -1,10 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  async rewrites() {
+  async headers() {
     return [
       {
-        source: "/socket.io/:path*",
-        destination: "/api/socket",
+        source: '/api/socket',
+        headers: [
+          { key: 'Connection', value: 'keep-alive' },
+        ],
       },
     ];
   },

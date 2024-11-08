@@ -5,6 +5,7 @@ import Input from "../common/Input";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Session } from "next-auth";
 import { Dm } from "@/types";
+import { socket } from "@/socket";
 
 interface Props {
   session: Session | null,
@@ -30,9 +31,10 @@ export default function DmInput(props: Props) {
           room_id: roomId,
         }
   
-        axios.post('/api/dm?room_id=' + roomId, dm)
+        axios.post('/api/dm', dm)
           .then((res) => {
             setText('');
+            socket.emit('message', roomId, dm);
           })
           .catch(e => console.log(e));
       }

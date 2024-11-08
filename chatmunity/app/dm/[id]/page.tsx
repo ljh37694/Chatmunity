@@ -8,8 +8,8 @@ import DmInput from '@/components/ui/DmInput';
 import Chatting from '@/components/ui/Chatting';
 import { useSession } from 'next-auth/react';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useSocketIo } from '@/components/provider/SocketIoProvider';
+import { useEffect, useRef, useState } from 'react';
+import { socket } from '@/socket';
   
 interface Props {
   params: {
@@ -21,16 +21,18 @@ export default function DmPage(props: Props) {
   const { params: { id: roomId } } = props;
   
   const { data: session } = useSession();
-  const { socket, isConnected } = useSocketIo();
 
   const [dmList, setDmList] = useState<Dm[]>([]);
   const [dmRoomData, setDmRoomData] = useState<DmRoom>();
   const [otherUser, setOtherUser] = useState<UserData>();
 
+  const bottomRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    axios.get('/api/dm?room_id=' + roomId)
+    axios.get(`/api/dm?room_id=${roomId}&count=${0}`)
       .then((res) => {
-        setDmList(res.data);
+        const list: Dm[] = res.data;
+        setDmList(list.reverse());
       })
       .catch(e => console.log(e));
 
@@ -40,19 +42,24 @@ export default function DmPage(props: Props) {
         setOtherUser(res.data?.member[0].email === session?.user?.email ? res.data?.member[1] as UserData : res.data?.member[0] as UserData)
       })
       .catch(e => console.log(e));
-
-    axios.get('/api/join?room_id=' + roomId)
-      .then(res => console.log(res.data))
-      .catch(e => console.log(e));
   }, []);
 
   useEffect(() => {
-    socket?.on('message', (msg) => {
-      console.log(dmList, msg);
+    socket.emit('joinRoom', roomId)
 
+    socket.on("message", (msg: Dm) => {
       setDmList((prev) => [...prev, msg]);
     });
-  }, [socket]);
+
+    return () => {
+      socket.off('message');
+      socket.off('joinRoom');
+
+      socket.on("disconnect", () => {
+        console.log('끝남');
+      });
+    }
+  }, []);
 
   return (
     <ChattingRoom title={otherUser?.name as string}>
@@ -69,6 +76,7 @@ export default function DmPage(props: Props) {
             );
           })
         }
+        <div ref={bottomRef}></div>
       </ChattingList>
     </ChattingRoom>
   );
