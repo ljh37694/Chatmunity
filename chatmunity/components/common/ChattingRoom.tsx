@@ -1,7 +1,6 @@
 'use client'
 
 import styles from '@/styles/common/ChattingRoom.module.css';
-import { useState } from 'react';
 
 interface ChattingRoomProps {
   children: React.ReactNode,
@@ -11,8 +10,6 @@ interface ChattingRoomProps {
 
 export default function ChattingRoom (props: ChattingRoomProps) {
   const { title } = props;
-
-  const [text, setText] = useState<string>('');
 
   return (
     <section className={`${styles.container} ${props.className}`}>

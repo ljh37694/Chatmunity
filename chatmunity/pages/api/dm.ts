@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponseS
       const result = await db.collection<Dm>('dm').find({
         room_id: req.query.room_id,
       })
-      .sort({ timestamp: -1 })
+      .sort({ date: -1 })
       .skip(parseInt(req.query.count as string) * limit)
       .limit(limit)
       .toArray();
@@ -26,10 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponseS
 
     else if (req.method === 'POST') {
       const result = await db.collection<Dm>('dm').insertOne(req.body);
-
-      const message: Dm = JSON.parse(req.body);
-
-      res.socket.server.io.emit('message', message.content);
+      res.socket.server.io.to(req.query.room_id as string).emit('message', req.body);
 
       res.status(200).json(result);
     }
@@ -43,5 +40,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponseS
     }
   } catch (e) {
     res.status(500).json(e);
+    console.log(e);
   }
 }

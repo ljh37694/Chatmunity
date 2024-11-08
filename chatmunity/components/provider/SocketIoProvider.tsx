@@ -1,25 +1,36 @@
 'use client'
 
-import { ClientToServerEvents, ServerToClientEvents } from "@/types/socket";
-import { useEffect, useState } from "react";
+import { ClientSocketType, ClientToServerEvents, InterServerEvents, ServerToClientEvents, SocketData } from "@/types/socket";
+import { ReactNode, useContext, useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
+import React from "react";
 
-interface useSocketIoType {
-  socket: Socket<ServerToClientEvents, ClientToServerEvents> | null,
-  isConnected: boolean
+interface SocketIoContextType {
+  socket: Socket<ServerToClientEvents, ClientToServerEvents> | null;
+  isConnected: boolean;
 }
 
-const useSocketIo: () => useSocketIoType = () => {
-  const [socket, setSocket] = useState<Socket<ServerToClientEvents, ClientToServerEvents> | null>(null);
+const SocketIoContext = React.createContext<SocketIoContextType>({
+  socket: null,
+  isConnected: false,
+});
+
+export const useSocketIo = () => {
+  return useContext(SocketIoContext);
+}
+
+export const SocketIoProvider = ({ children }: Readonly<{ children: ReactNode}>) => {
+  const [socket, setSocket] = useState<ClientSocketType | null>(null);
   const [isConnected, setIsConnected] = useState<boolean>(false);
 
   useEffect(() => {
-    const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io("http://localhost:3000/dm", {
+    const socket: ClientSocketType = io('ws://localhost:3000', {
       path: '/api/socket',
-      addTrailingSlash: false,
+      transports: ['websocket'],
     });
 
     socket.on('connect', () => {
+      console.log('socket is connected');
       setIsConnected(true);
     });
 
@@ -28,60 +39,20 @@ const useSocketIo: () => useSocketIoType = () => {
     });
 
     socket.on('disconnect', () => {
+      console.log('socket is disconnected');
       setIsConnected(false);
     });
 
     setSocket(socket);
 
     return () => {
-      if (socket) {
-        socket.disconnect();
-      }
-    }
-  }, []);
-
-  return {
-    socket: socket,
-    isConnected: isConnected,
-  }
-}
-
-export {useSocketIo};
-
-export default function SocketProvider({ children }: Readonly<{ children: React.ReactNode}>) {
-  const [socket, setSocket] = useState<Socket<ServerToClientEvents, ClientToServerEvents> | null>(null);
-  const [isConnected, setIsConnected] = useState<boolean>(false);
-
-  useEffect(() => {
-    const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io("", {
-      path: '/api/socket',
-      addTrailingSlash: false,
-    });
-
-    socket.on('connect', () => {
-      setIsConnected(true);
-    });
-
-    socket.on('connect_error', (error: Error) => {
-      console.log(error);
-    });
-
-    socket.on('disconnect', () => {
-      setIsConnected(false);
-    });
-
-    setSocket(socket);
-
-    return () => {
-      if (socket) {
-        socket.disconnect();
-      }
+      socket.disconnect();
     }
   }, []);
 
   return (
-    <>
+    <SocketIoContext.Provider value={{ socket, isConnected }}>
       {children}
-    </>
+    </SocketIoContext.Provider>
   );
 }

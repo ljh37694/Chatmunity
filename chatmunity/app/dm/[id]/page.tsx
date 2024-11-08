@@ -21,7 +21,7 @@ export default function DmPage(props: Props) {
   const { params: { id: roomId } } = props;
   
   const { data: session } = useSession();
-  const { socket } = useSocketIo();
+  const { socket, isConnected } = useSocketIo();
 
   const [dmList, setDmList] = useState<Dm[]>([]);
   const [dmRoomData, setDmRoomData] = useState<DmRoom>();
@@ -41,20 +41,24 @@ export default function DmPage(props: Props) {
       })
       .catch(e => console.log(e));
 
-    
+    axios.get('/api/join?room_id=' + roomId)
+      .then(res => console.log(res.data))
+      .catch(e => console.log(e));
   }, []);
 
   useEffect(() => {
     socket?.on('message', (msg) => {
-      
-    })
+      console.log(dmList, msg);
+
+      setDmList((prev) => [...prev, msg]);
+    });
   }, [socket]);
 
   return (
     <ChattingRoom title={otherUser?.name as string}>
       <ChattingList inputComp={<DmInput roomId={roomId} session={session} setDmList={setDmList} />}>
         {
-          dmList.map(async (item, idx) => {
+          dmList.map((item, idx) => {
             const data: Chat = {
               ...item,
               _id: item._id?.toString(),

@@ -1,13 +1,13 @@
+import { Socket } from "socket.io-client";
+import { Dm } from ".";
+
 export interface ServerToClientEvents {
-  noArg: () => void;
-  basicEmit: (a: number, b: string, c: Buffer) => void;
-  withAck: (d: string, callback: (e: number) => void) => void;
-  message: (message: string) => void;
+  message: (message: Dm) => void;
 }
 
 export interface ClientToServerEvents {
-  hello: () => void;
-  message: () => void;
+  message: (roomId: string, message: Dm) => void;
+  joinRoom: (roomId: string) => void;
 }
 
 export interface InterServerEvents {
@@ -19,3 +19,5 @@ export interface SocketData {
   age: number;
   massage: string;
 }
+
+export type ClientSocketType = Socket<ServerToClientEvents, ClientSocketType>;

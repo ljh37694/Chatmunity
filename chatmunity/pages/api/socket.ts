@@ -1,43 +1,31 @@
 import { Server as NetServer } from "http";
 import { Server as SocketIOServer } from "socket.io";
+import { Socket } from 'net';
 import type { NextApiRequest, NextApiResponse } from "next";
-import { Server } from "socket.io";
-import { ClientToServerEvents, ServerToClientEvents } from "@/types/socket";
+import { ClientToServerEvents, InterServerEvents, ServerToClientEvents } from "@/types/socket";
 
 export type NextApiResponseServerIo = NextApiResponse & {
-  socket: {
+  socket: Socket & {
     server: NetServer & {
       io: SocketIOServer<ClientToServerEvents, ServerToClientEvents>
     }
   }
 }
 
-const SocketHandler = (req: NextApiRequest, res: NextApiResponseServerIo) => {
+export default function SocketHandler(req: NextApiRequest, res: NextApiResponseServerIo) {
   if (!res.socket.server.io) {
     console.log("Setting up Socket.IO server...");
-    const httpServer: NetServer = res.socket.server as any;
-    const io = new Server(httpServer, { 
+
+    const httpServer: NetServer = res.socket.server as NetServer;
+
+    const io = new SocketIOServer(httpServer, { 
       path: "/api/socket",
       addTrailingSlash: false,
+      transports: ["websocket"],
     });
     res.socket.server.io = io;
-
-    io.on("connection", (socket) => {
-      console.log("User connected");
-
-      socket.on("message", (message) => {
-        // 받은 메시지를 모든 클라이언트에 브로드캐스트
-        io.emit("message", message);
-      });
-
-      socket.on("disconnect", () => {
-        console.log("User disconnected");
-      });
-    });
   } else {
     console.log("Socket.IO server already running");
   }
   res.end();
-};
-
-export default SocketHandler;
+}
