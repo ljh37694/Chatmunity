@@ -1,17 +1,28 @@
 .container {
-  height: 800px;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  position: relative;
 }
 
 .chatContainer {
-  width: 100%;
-  overflow-y: scroll;
-  margin: 0 auto;
+  overflow-y: hidden;
   flex-grow: 1;
+  height: 560px;
 }
 
-.chatContainer::-webkit-scrollbar {
+.chatList::-webkit-scrollbar {
   display: none;
+}
+
+.chatList {
+  width: 100%;
+  height: calc(100% - 55px);
+  overflow-y: scroll;
+}
+
+.inputContainer {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translate(-50%, 0);
 }

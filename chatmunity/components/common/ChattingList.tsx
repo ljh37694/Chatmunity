@@ -11,10 +11,14 @@ export default function ChattingList(props: Props) {
   return (
     <div className={styles.container}>
       <section className={styles.chatContainer}>
-        { children }
+        <div className={styles.chatList}>
+          { children }
+        </div>
       </section>
       
-      {inputComp}
+      <section className={styles.inputContainer}>
+       {inputComp}
+      </section>
     </div>
   )
 }

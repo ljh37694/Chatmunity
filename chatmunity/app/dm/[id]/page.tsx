@@ -28,6 +28,7 @@ export default function DmPage(props: Props) {
 
   const bottomRef = useRef<HTMLDivElement>(null);
 
+  // axios로 message list 가져오기
   useEffect(() => {
     axios.get(`/api/dm?room_id=${roomId}&count=${0}`)
       .then((res) => {
@@ -44,6 +45,7 @@ export default function DmPage(props: Props) {
       .catch(e => console.log(e));
   }, []);
 
+  // socket io
   useEffect(() => {
     if (socket.connected) {
       socket.emit('joinRoom', roomId);
@@ -63,41 +65,12 @@ export default function DmPage(props: Props) {
     }
   }, []);
 
-  const [isConnected, setIsConnected] = useState(false);
-  const [transport, setTransport] = useState("N/A");
-
   useEffect(() => {
-    if (socket.connected) {
-      onConnect();
-    }
-
-    function onConnect() {
-      setIsConnected(true);
-      setTransport(socket.io.engine.transport.name);
-
-      socket.io.engine.on("upgrade", (transport) => {
-        setTransport(transport.name);
-      });
-    }
-
-    function onDisconnect() {
-      setIsConnected(false);
-      setTransport("N/A");
-    }
-
-    socket.on("connect", onConnect);
-    socket.on("disconnect", onDisconnect);
-
-    return () => {
-      socket.off("connect", onConnect);
-      socket.off("disconnect", onDisconnect);
-    };
-  }, []);
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [dmList]);
 
   return (
     <ChattingRoom title={otherUser?.name as string}>
-            <p>Status: { isConnected ? "connected" : "disconnected" }</p>
-            <p>Transport: { transport }</p>
       <ChattingList inputComp={<DmInput roomId={roomId} session={session} setDmList={setDmList} />}>
         {
           dmList.map((item, idx) => {
