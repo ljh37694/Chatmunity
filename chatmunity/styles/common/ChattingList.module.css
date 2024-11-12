@@ -2,12 +2,13 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  height: calc(100%);
 }
 
 .chatContainer {
   overflow-y: hidden;
   flex-grow: 1;
-  height: 560px;
+
 }
 
 .chatList::-webkit-scrollbar {
@@ -16,7 +17,7 @@
 
 .chatList {
   width: 100%;
-  height: calc(100% - 55px);
+  height: calc(100% - 80px);
   overflow-y: scroll;
 }
 
@@ -24,5 +25,6 @@
   position: absolute;
   bottom: 15px;
   left: 50%;
+  width: 80%;
   transform: translate(-50%, 0);
 }
