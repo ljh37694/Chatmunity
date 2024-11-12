@@ -45,15 +45,17 @@ export default function DmPage(props: Props) {
   }, []);
 
   useEffect(() => {
-    socket.emit('joinRoom', roomId)
+    if (socket.connected) {
+      socket.emit('joinRoom', roomId);
 
-    socket.on("message", (msg: Dm) => {
-      setDmList((prev) => [...prev, msg]);
-    });
+      socket.on("message", (msg: Dm) => {
+        console.log(msg);
+        setDmList((prev) => [...prev, msg]);
+      });
+    }
 
     return () => {
       socket.off('message');
-      socket.off('joinRoom');
 
       socket.on("disconnect", () => {
         console.log('끝남');
@@ -61,8 +63,41 @@ export default function DmPage(props: Props) {
     }
   }, []);
 
+  const [isConnected, setIsConnected] = useState(false);
+  const [transport, setTransport] = useState("N/A");
+
+  useEffect(() => {
+    if (socket.connected) {
+      onConnect();
+    }
+
+    function onConnect() {
+      setIsConnected(true);
+      setTransport(socket.io.engine.transport.name);
+
+      socket.io.engine.on("upgrade", (transport) => {
+        setTransport(transport.name);
+      });
+    }
+
+    function onDisconnect() {
+      setIsConnected(false);
+      setTransport("N/A");
+    }
+
+    socket.on("connect", onConnect);
+    socket.on("disconnect", onDisconnect);
+
+    return () => {
+      socket.off("connect", onConnect);
+      socket.off("disconnect", onDisconnect);
+    };
+  }, []);
+
   return (
     <ChattingRoom title={otherUser?.name as string}>
+            <p>Status: { isConnected ? "connected" : "disconnected" }</p>
+            <p>Transport: { transport }</p>
       <ChattingList inputComp={<DmInput roomId={roomId} session={session} setDmList={setDmList} />}>
         {
           dmList.map((item, idx) => {

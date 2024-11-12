@@ -30,11 +30,12 @@ export default function DmInput(props: Props) {
           name: session?.user?.name as string,
           room_id: roomId,
         }
+
+        socket.emit('message', roomId, dm);
   
         axios.post('/api/dm', dm)
           .then((res) => {
             setText('');
-            socket.emit('message', roomId, dm);
           })
           .catch(e => console.log(e));
       }

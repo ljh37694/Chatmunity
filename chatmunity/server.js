@@ -17,11 +17,11 @@ app.prepare().then(() => {
   io.on("connection", (socket) => {
     socket.on('message', (roomId, message) => {
       console.log('message: ' + message.content);
-      socket.to(roomId).emit('message', message);
+      io.to(roomId).emit('message', message);
     });
 
     socket.on('joinRoom', (roomId) => {
-      console.log('join: ' + roomId);
+      console.log('join: ' + roomId, " " + socket.rooms);
       socket.join(roomId);
     });
 
