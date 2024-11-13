@@ -12,7 +12,6 @@ export default function TopNavbarMenu() {
 
   const navMenuList: TopNavMenu[] = [
     { url: "/main", icon: faHome }, 
-    { url: '/write', icon: faPlus },
     { url: '/dm', icon: faMessage },
   ];
 

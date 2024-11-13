@@ -4,6 +4,7 @@ import styles from '@/styles/layout/TopNavbar.module.css';
 import Link from "next/link";
 import TopNavbarMenu from "../ui/TopNavbarMenu";
 import DrawerButton from "../ui/DrawerButton";
+import TopNavbarInput from "../ui/TopNavbarInput";
 
 export default async function TopNavbar() {
   return (
@@ -16,10 +17,7 @@ export default async function TopNavbar() {
       </section>
 
       <section className={styles.middle}>
-        <div className={styles.searchContainer}>
-          <label><FontAwesomeIcon icon={faMagnifyingGlass} /></label>
-          <input className={styles.searchInput} />
-        </div>
+        <TopNavbarInput />
       </section>
 
       <section className={styles.right}>
