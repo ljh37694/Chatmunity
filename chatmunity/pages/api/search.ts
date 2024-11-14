@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (req.method === "GET") {
       if (req.query.query) {
-        const result = await db.collection<Post>('post').find({ title: { $regex: req.query.query as string, $options: 'i' } });
+        const result = await db.collection<Post>('post').find({ title: { $regex: req.query.query as string, $options: 'i' } }).limit(parseInt(req.query.page as string)).toArray();
 
         res.status(200).json(result);
       }
