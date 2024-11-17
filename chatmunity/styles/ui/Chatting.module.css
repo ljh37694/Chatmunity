@@ -27,3 +27,7 @@
   cursor: pointer;
   user-select: none;
 }
+
+.highlight {
+  background-color: yellow;
+}

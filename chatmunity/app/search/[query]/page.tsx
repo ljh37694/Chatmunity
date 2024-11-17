@@ -31,15 +31,20 @@ export default async function SearchPage(props: Props) {
     }
   });
 
+  console.log(postList);
+
   return (
     <ChattingRoom title={searchQuery}>
       <ChattingList inputComp={<SearchInput />}>
         {
+          postList.length !== 0 && postList ?
           postList.map((item, idx) => {
             return (
-              <Chatting chatData={item} url={`/post/` + item._id} isOtherChat={false} key={idx} />
+              <Chatting chatData={item} url={`/post/` + item._id} isOtherChat={false} key={idx} highlightWord={searchQuery} />
             );
           })
+          :
+          <p className={styles.noResult}>검색 결과가 없습니다</p>
         }
       </ChattingList>
     </ChattingRoom>
