@@ -11,7 +11,6 @@ export default function TopNavbarMenu() {
   const router = useRouter();
 
   const navMenuList: TopNavMenu[] = [
-    { url: "/main", icon: faHome }, 
     { url: '/dm', icon: faMessage },
   ];
 

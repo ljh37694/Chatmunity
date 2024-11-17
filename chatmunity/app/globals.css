@@ -152,7 +152,7 @@ p, input, textarea {
     width: calc(100%);
   }
 
-  .main-container {
+  #main-container {
     max-width: 100%;
   }
 

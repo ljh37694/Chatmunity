@@ -20,7 +20,7 @@ export default function Chatting(props: Props) {
   const [textList, setTextList] = useState<string[]>([]);
 
   useEffect(() => {
-    if (chatData && highlightWord) {
+    if (chatData) {
       setTextList(chatData.content.split(new RegExp(`(${highlightWord})`, 'gi')));
     }
   }, [highlightWord]);
@@ -34,7 +34,7 @@ export default function Chatting(props: Props) {
       <p className={styles.content}>
         {
           textList.map((item, idx) => {
-            return <span className={item.toLowerCase() === highlightWord?.toLowerCase() ? styles.highlight : ''}>{item}</span>
+            return <span key={idx} className={item.toLowerCase() === highlightWord?.toLowerCase() ? styles.highlight : ''}>{item}</span>
           })
         }
       </p>
