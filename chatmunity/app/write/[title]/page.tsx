@@ -70,7 +70,7 @@ export default function Write(props: Props) {
     <div>
       <form name='postForm' className={styles.form} onSubmit={onSubmit}>
         <input value={title} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)} ref={titleRef} className={styles.title} placeholder='제목을 입력해주세요' />
-        <textarea wrap='hard' placeholder='내용을 입력해주세요' ref={contentRef} className={styles.content} rows={28} cols={100}></textarea>
+        <textarea wrap='hard' placeholder='내용을 입력해주세요' ref={contentRef} className={styles.content} rows={22} cols={100}></textarea>
         <Button className={styles.button} type="submit" text='글쓰기' />
       </form>
     </div>

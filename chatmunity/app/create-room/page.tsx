@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 export default function CreateRoom() {
   const nameInputRef = useRef<HTMLInputElement>(null);
   const idInputRef = useRef<HTMLInputElement>(null);
-
+  const imageInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
   return (
@@ -26,6 +26,7 @@ export default function CreateRoom() {
         axios.post("/api/room", {
           title: nameInputRef.current?.value,
           id: idInputRef.current?.value,
+          image: imageInputRef.current?.value,
         })
           .then((res) => {
             router.push('/room');
@@ -41,6 +42,7 @@ export default function CreateRoom() {
     }}>
       <input className={styles.input} placeholder='방 이름을 입력하세요' ref={nameInputRef} />
       <input className={styles.input} placeholder='방 아이디를 입력하세요' ref={idInputRef} />
+      <input className={styles.input} placeholder='방 이미지 URL을 입력하세요' ref={imageInputRef} />
       <Button className={styles.btn} text='만들기' type="submit" />
     </form>
   );

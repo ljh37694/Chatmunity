@@ -43,7 +43,7 @@ export interface Room {
   _id?: ObjectId | string,
   title: string,
   content: string,
-  img: string,
+  image: string,
 }
 
 export interface PostRoomType extends Room {

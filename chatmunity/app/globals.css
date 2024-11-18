@@ -154,6 +154,7 @@ p, input, textarea {
 
   #main-container {
     max-width: 100%;
+    padding: 0 10px;
   }
 
   #right-panel {

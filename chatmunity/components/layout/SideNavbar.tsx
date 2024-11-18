@@ -2,7 +2,7 @@
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from '@/styles/layout/SideNavbar.module.css';
-import { faComments, faFire, faHome, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faFire, faHome, faMessage, faUser, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -16,9 +16,10 @@ export default function SideNavbar() {
   const router = useRouter();
 
   const navMenuList: NavMenu[] = [
-    { text: 'Home', icon: faHome, url: '/main'},
+    { text: 'Home', icon: faHome, url: '/room'},
     { text: 'Hot', icon: faFire, url: '/hot' },
-    { text: 'Room', icon: faComments, url: '/room'}
+    { text: 'DM', icon: faMessage, url: '/dm'},
+    { text: 'MyPage', icon: faUser, url: '/mypage'},
   ];
 
   const [activeMenu, setActiveMenu] = useState<number>(-1);
@@ -44,7 +45,6 @@ export default function SideNavbar() {
             </label>
           );
         })}
-
       </section>
     </nav>
   )

@@ -2,7 +2,7 @@
 
 import styles from '@/styles/ui/FriendButton.module.css';
 
-import { faComments } from "@fortawesome/free-solid-svg-icons"
+import { faUserFriends } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect } from 'react';
 
@@ -26,7 +26,7 @@ export default function FriendButton() {
         backdrop?.classList.add('show-backdrop');
       }
     }}>
-      <FontAwesomeIcon icon={faComments} />
+      <FontAwesomeIcon icon={faUserFriends} />
     </label>
   )
 }

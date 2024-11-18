@@ -1,17 +1,15 @@
 'use client'
 
 import { TopNavMenu } from "@/types";
-import { faHome, faMessage, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faMessage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
-import UserBUtton from "./UserButton";
 import FriendButton from "./FriendButton";
 
 export default function TopNavbarMenu() {
   const router = useRouter();
 
   const navMenuList: TopNavMenu[] = [
-    { url: '/dm', icon: faMessage },
   ];
 
   return (
@@ -26,7 +24,6 @@ export default function TopNavbarMenu() {
         );
       })}
 
-      <UserBUtton />
       <FriendButton />
     </>
   );
