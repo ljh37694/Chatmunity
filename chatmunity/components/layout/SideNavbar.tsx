@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from '@/styles/layout/SideNavbar.module.css';
 import { faFire, faHome, faMessage, faUser, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 interface NavMenu {
   text: string,
@@ -14,6 +14,7 @@ interface NavMenu {
 
 export default function SideNavbar() {
   const router = useRouter();
+  const pathname = usePathname();
 
   const navMenuList: NavMenu[] = [
     { text: 'Home', icon: faHome, url: '/room'},
@@ -25,10 +26,9 @@ export default function SideNavbar() {
   const [activeMenu, setActiveMenu] = useState<number>(-1);
 
   useEffect(() => {
-    if (activeMenu == -1) {
-      setActiveMenu(Number(sessionStorage.getItem('activeSideMenu')));
-    }
-  }, [activeMenu]);
+    const curURL = pathname?.split('/')[1];
+    setActiveMenu(navMenuList.findIndex(item => item.url.split('/')[1] === curURL));
+  }, [pathname]);
 
   return (
     <nav className={styles['navbar']}>
