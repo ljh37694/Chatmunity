@@ -2,7 +2,7 @@
 
 import styles from '@/styles/ui/PostHeaderMenu.module.css';
 import { DmRoom, Post, UserData } from '@/types';
-import { faEllipsisVertical, faMessage, faPen, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisVertical, faMessage, faPen, faPlus, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { Session } from 'next-auth';
@@ -34,6 +34,14 @@ export default function PostHeaderMenu(props: Props) {
       show: session?.user?.email === postData.writer,
       onClick: (e: React.MouseEvent) => {
         router.push("/edit/" + postData._id);
+      }
+    },
+    {
+      icon: faPlus,
+      text: "친구추가",
+      show: true,
+      onClick: (e: React.MouseEvent) => {
+        console.log(e);
       }
     },
     {
