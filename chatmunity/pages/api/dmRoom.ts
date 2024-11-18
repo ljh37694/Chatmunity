@@ -9,20 +9,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const db = client.db('Chatmunity');
 
     if (req.method === 'GET') {
-      // const users = JSON.parse(req.query.member as string);
+      let result;
 
-      // const result = await db.collection<DmRoom>('dmRoom').findOne({
-      //   member: {
-      //     $all: [
-      //       { $elemMatch: { email: users[0] }},
-      //       { $elemMatch: { email: users[1] }},
-      //     ]
-      //   }
-      // });
+      if (req.query.member) {
+        const users = JSON.parse(req.query.member as string);
 
-      const result = await db.collection<DmRoom>('dmRoom').findOne<DmRoom>({
-        _id: new ObjectId(req.query.room_id as string),
-      });
+        result = await db.collection<DmRoom>('dmRoom').findOne({
+          member: {
+            $all: [
+              { $elemMatch: { email: users[0] }},
+              { $elemMatch: { email: users[1] }},
+            ]
+          }
+        });
+      } else {
+        result = await db.collection<DmRoom>('dmRoom').findOne<DmRoom>({
+          _id: new ObjectId(req.query.room_id as string),
+        });
+      }
 
       res.status(200).json(result);
     }

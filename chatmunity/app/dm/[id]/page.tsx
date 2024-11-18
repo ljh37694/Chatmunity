@@ -28,8 +28,8 @@ export default function DmPage(props: Props) {
 
   const bottomRef = useRef<HTMLDivElement>(null);
 
-  // axios로 message list 가져오기
   useEffect(() => {
+    // axios로 message list 가져오기
     axios.get(`/api/dm?room_id=${roomId}&count=${0}`)
       .then((res) => {
         const list: Dm[] = res.data;
@@ -37,13 +37,17 @@ export default function DmPage(props: Props) {
       })
       .catch(e => console.log(e));
 
+    // axios로 다른 유저 정보 가져오기
     axios.get('/api/dmRoom?room_id=' + roomId)
       .then((res) => {
         setDmRoomData(res.data);
-        setOtherUser(res.data?.member[0].email === session?.user?.email ? res.data?.member[1] as UserData : res.data?.member[0] as UserData)
       })
       .catch(e => console.log(e));
   }, []);
+
+  useEffect(() => {
+    setOtherUser(dmRoomData?.member[0].email === session?.user?.email ? dmRoomData?.member[1] as UserData : dmRoomData?.member[0] as UserData);
+  }, [dmRoomData]);
 
   // socket io
   useEffect(() => {

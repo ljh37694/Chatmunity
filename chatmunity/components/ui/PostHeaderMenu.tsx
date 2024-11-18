@@ -18,12 +18,11 @@ interface Menu {
 
 interface Props {
   postData: Post,
-  writerData: UserData,
   session: Session | null,
 }
 
 export default function PostHeaderMenu(props: Props) {
-  const { session, postData, writerData } = props;
+  const { session, postData } = props;
   const [show, setShow] = useState<boolean>(false);
 
   const router = useRouter();
@@ -32,7 +31,7 @@ export default function PostHeaderMenu(props: Props) {
     {
       icon: faPen,
       text: "수정하기",
-      show: true,
+      show: session?.user?.email === postData.writer,
       onClick: (e: React.MouseEvent) => {
         router.push("/edit/" + postData._id);
       }
@@ -55,7 +54,7 @@ export default function PostHeaderMenu(props: Props) {
                   },
                   {
                     email: postData.writer,
-                    name: postData.writer,
+                    name: postData.name,
                   },
                 ]
               };

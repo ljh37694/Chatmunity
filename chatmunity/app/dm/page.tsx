@@ -26,7 +26,7 @@ export default async function DM() {
           const data: Room = {
             ...item,
             content: lastDm?.content as string,
-            img: otherUser?.image as string,
+            image: otherUser?.image as string,
             title: otherUser?.name as string,
             _id: item._id?.toString(),
           }
