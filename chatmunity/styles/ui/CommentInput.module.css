@@ -20,7 +20,7 @@
   padding: 0.5em;
   font-size: 18px;
   border: none;
-  border-bottom: 1px solid #c0c0c0;
+  border-bottom: 1px solid var(--border-color);
   outline: none;
 }
 
@@ -30,6 +30,6 @@
 }
 
 .cancleBtn {
-  background-color: rgb(219, 219, 219) !important;
+  background-color: var(--grey-color) !important;
   margin-right: 10px;
 }
