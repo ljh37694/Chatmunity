@@ -21,11 +21,14 @@ export interface Post extends Chat {
   room_id: string,
 }
 
+type UserStatus = 'online' | 'offline' | 'away';
+
 export interface UserData {
   name: string,
   email: string,
   image: string,
   created_at: string,
+  status: UserStatus,
 }
 
 export interface Profile {
@@ -60,4 +63,10 @@ export interface DmRoom {
 
 export interface Dm extends Chat {
   room_id: string,
+}
+
+export interface Friend {
+  _id?: ObjectId | string,
+  user_id: string,
+  friend_id: string,
 }

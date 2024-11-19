@@ -1,22 +1,37 @@
-import Friend from '../ui/Friend';
+import { connectDB } from '@/app/utils/datadbase';
+import FriendItem from '../ui/FriendItem';
 import styles from '@/styles/layout/FriendsPanel.module.css';
-import { Profile } from '@/types';
+import { Friend, Profile, UserData } from '@/types';
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import { getServerSession } from 'next-auth';
 
-export default function FriendsPanel() {
-  const imgUrl = 'https://mblogthumb-phinf.pstatic.net/20160817_259/retspe_14714118890125sC2j_PNG/%C7%C7%C4%AB%C3%F2_%281%29.png?type=w800';
+export default async function FriendsPanel() {
+  const client = await connectDB;
+  const db = client.db('Chatmunity');
 
-  const profileList: Profile[] = [
-    { name: 'Lee', img: imgUrl },
-    { name: 'Kai', img: imgUrl },
-    { name: 'Lee', img: imgUrl },
-    { name: 'Kai', img: imgUrl },
-    { name: 'Lee', img: imgUrl },
-    { name: 'Kai', img: imgUrl },
-    { name: 'Lee', img: imgUrl },
-    { name: 'Kai', img: imgUrl },
-    { name: 'Lee', img: imgUrl },
-    { name: 'Kai', img: imgUrl },
-  ];
+  const session = await getServerSession(authOptions);
+
+  // 친구 id 찾기
+  const friendIdList = await db.collection<Friend>('friend').find({
+    user_id: session?.user?.email as string,
+  }).map((item) => item.friend_id).toArray();
+
+  // 친구 정보 찾기
+  const friendList = await db.collection<UserData>('user').find({
+    email: { $in: friendIdList },
+  }).toArray();
+
+  // 친구 프로필 리스트 생성
+  const profileList: Profile[] = friendList.map((item) => ({
+    name: item.name,
+    img: item.image,
+  }));
+
+  await db.collection<UserData>('user').updateOne({
+    email: session?.user?.email as string,
+  }, {
+    $set: { status: 'online' },
+  });
   
   return (
     <div className={styles.panel}>
@@ -24,7 +39,7 @@ export default function FriendsPanel() {
       <section className={styles.content}>
         {profileList.map((item, idx) => {
           return (
-            <Friend data={item} key={idx} />
+            <FriendItem data={item} key={idx} />
           );
         })}
       </section>

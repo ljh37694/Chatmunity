@@ -1,15 +1,15 @@
 'use client'
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Profile } from '@/types';
 import styles from '@/styles/layout/FriendsPanel.module.css';
 
-export default function Friend(props: { data: Profile }) {
+export default function FriendItem(props: { data: Profile }) {
   const { img, name } = props.data;
 
   const [status, setStatus] = useState<number>(0);
 
-  const statusList: string[] = ['online', 'offline', 'away'];
+  const statusList: readonly string[] = ['offline', 'online', 'away'];
 
   return (
     <label className={styles.friend}>

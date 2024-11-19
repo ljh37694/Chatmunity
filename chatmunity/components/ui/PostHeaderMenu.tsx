@@ -1,7 +1,7 @@
 'use client'
 
 import styles from '@/styles/ui/PostHeaderMenu.module.css';
-import { DmRoom, Post, UserData } from '@/types';
+import { DmRoom, Friend, Post, UserData } from '@/types';
 import { faEllipsisVertical, faMessage, faPen, faPlus, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
@@ -39,9 +39,21 @@ export default function PostHeaderMenu(props: Props) {
     {
       icon: faPlus,
       text: "친구추가",
-      show: true,
+      show: session?.user?.email !== postData.writer,
       onClick: (e: React.MouseEvent) => {
-        console.log(e);
+        const user1: Friend = {
+          user_id: session?.user?.email as string,
+          friend_id: postData.writer,
+        };
+
+        const user2: Friend = { 
+          user_id: postData.writer,
+          friend_id: session?.user?.email as string,
+        };
+
+        axios.post('/api/friend', [user1, user2])
+          .then((res) => console.log(res.data))
+          .catch((e) => console.log(e));
       }
     },
     {
