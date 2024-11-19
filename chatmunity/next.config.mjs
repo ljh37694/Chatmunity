@@ -10,6 +10,16 @@ const nextConfig = {
       },
     ];
   },
+
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/room',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
