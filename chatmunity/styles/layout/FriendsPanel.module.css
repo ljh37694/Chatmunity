@@ -92,3 +92,28 @@
 .content::-webkit-scrollbar-thumb:hover {
   background: #b1b1b1;
 }
+
+.menu {
+  position: absolute;
+  left: 3em;
+  top: 7em;
+  background-color: #fff;
+  width: 10em;
+  border-radius: 8px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.menuItem {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.menuItem:last-child {
+  border-bottom: none;
+}
+
+.menuItem:hover {
+  background-color: #eee;
+}
+
