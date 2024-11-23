@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Profile } from '@/types';
 import styles from '@/styles/layout/FriendsPanel.module.css';
 
@@ -15,13 +15,28 @@ export default function FriendItem(props: { data: Profile }) {
   const [status, setStatus] = useState<number>(0);
   const [showMenu, setShowMenu] = useState<boolean>(false);
 
+  const ref = useRef<HTMLLabelElement>(null);
+
   const statusList: readonly string[] = ['offline', 'online', 'away'];
 
   const onContextMenu = (e: React.MouseEvent<HTMLLabelElement>) => {
     e.preventDefault();
-    setShowMenu(!showMenu);
+    setShowMenu(true);
     console.log('contextmenu');
   }
+
+  useEffect(() => {
+    const onMouseDown = (e: MouseEvent) => {
+      console.log(e.target);
+      if (ref.current && showMenu && !ref.current.contains(e.target as Node)) {
+        setShowMenu(false);
+      }
+    }
+
+    document.addEventListener('mousedown', onMouseDown);
+
+    return () => document.removeEventListener('mousedown', onMouseDown);
+  }, [showMenu]);
 
   const menuList: Menu[] = [
     {
@@ -36,13 +51,13 @@ export default function FriendItem(props: { data: Profile }) {
         console.log('친구 삭제');
       }
     }
-  ]
+  ];
 
   return (
-    <label className={styles.friend} onContextMenu={onContextMenu}>
+    <label className={styles.friend} onContextMenu={onContextMenu} ref={ref}>
       <div className={styles.profile}>
         <img src={img} />
-        <div onClick={() => setStatus((status + 1) % statusList.length)}  className={`${styles.statusCircle} ${styles[statusList[status]]}`}></div>
+        <div onClick={() => setStatus((status + 1) % statusList.length)} className={`${styles.statusCircle} ${styles[statusList[status]]}`}></div>
       </div>
       
       <p>{name}</p>
