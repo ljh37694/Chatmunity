@@ -33,7 +33,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         res.status(200).json(result);
       }
     }
+
+    else if (req.method === 'DELETE') {
+      const data = req.body;
+
+      const result = await db.collection<Friend>('friend').deleteMany({
+        $or: [
+          { user_id: data.user_id, friend_id: data.friend_id },
+          { user_id: data.friend_id, friend_id: data.user_id },
+        ],
+      });
+
+      console.log(data);
+
+      res.status(200).json(result);
+    }
   } catch (e) {
     res.status(500).json(e);
+    console.log(e);
   }
 }

@@ -1,15 +1,17 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react';
-import { Profile } from '@/types';
+import { Profile, UserData } from '@/types';
 import styles from '@/styles/layout/FriendsPanel.module.css';
+import axios from 'axios';
+import { Session } from 'next-auth';
 
 interface Menu {
   name: string;
   onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export default function FriendItem(props: { data: Profile }) {
+export default function FriendItem(props: { data: Profile, friendData: UserData, session: Session | null }) {
   const { img, name } = props.data;
 
   const [status, setStatus] = useState<number>(0);
@@ -48,7 +50,18 @@ export default function FriendItem(props: { data: Profile }) {
     {
       name: '친구 삭제',
       onClick: () => {
-        console.log('친구 삭제');
+        axios.delete('/api/friend', {
+          data: {
+            user_id: props.session?.user?.email as string,
+            friend_id: props.friendData.email,
+          }
+        }).then((res) => {
+          console.log(res);
+          console.log('친구 삭제 성공!');
+        }).catch((err) => {
+          console.log(err);
+          console.log('친구 삭제 실패!');
+        });
       }
     }
   ];

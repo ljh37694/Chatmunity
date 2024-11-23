@@ -39,7 +39,7 @@ export default async function FriendsPanel() {
       <section className={styles.content}>
         {profileList.map((item, idx) => {
           return (
-            <FriendItem data={item} key={idx} />
+            <FriendItem data={item} key={idx} friendData={friendList[idx]} session={session} />
           );
         })}
       </section>
