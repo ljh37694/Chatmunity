@@ -28,7 +28,8 @@ export const authOptions: NextAuthOptions = {
           name: user?.name as string,
           image: user?.image as string,
           email: user?.email as string,
-          createdAt: (new Date()).toString(),
+          created_at: (new Date()).toString(),
+          status: 'offline',
         });
       }
 

@@ -5,6 +5,7 @@ import { Profile, UserData } from '@/types';
 import styles from '@/styles/layout/FriendsPanel.module.css';
 import axios from 'axios';
 import { Session } from 'next-auth';
+import { useRouter } from 'next/navigation';
 
 interface Menu {
   name: string;
@@ -13,9 +14,12 @@ interface Menu {
 
 export default function FriendItem(props: { data: Profile, friendData: UserData, session: Session | null }) {
   const { img, name } = props.data;
+  const { friendData } = props;
 
   const [status, setStatus] = useState<number>(0);
   const [showMenu, setShowMenu] = useState<boolean>(false);
+
+  const router = useRouter();
 
   const ref = useRef<HTMLLabelElement>(null);
 
@@ -44,7 +48,13 @@ export default function FriendItem(props: { data: Profile, friendData: UserData,
     {
       name: 'DM',
       onClick: () => {
-        console.log('DM');
+        const users = [props.session?.user?.email as string, friendData.email];
+
+        axios.get('/api/dmRoom?member=' + JSON.stringify(users)).then((res) => {
+          router.push(`/dm/${res.data._id}`);
+        }).catch((err) => {
+          console.log(err);
+        });
       }
     },
     {
