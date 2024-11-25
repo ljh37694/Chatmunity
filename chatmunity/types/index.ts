@@ -19,6 +19,7 @@ export interface Post extends Chat {
   views: number,
   likes: number,
   room_id: string,
+  like_users: string[],
 }
 
 type UserStatus = 'online' | 'offline' | 'away';

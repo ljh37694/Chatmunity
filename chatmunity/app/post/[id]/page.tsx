@@ -30,7 +30,7 @@ export default async function PostDetail(props: Props) {
       <h3 className={styles.title}>{postData?.title}</h3>
       <p className={styles.content}>{postData?.content}</p>
       <section className={styles.heartContainer}>
-        <HeartButton postData={postData as Post} />
+        <HeartButton postData={postData as Post} session={session} />
       </section>
 
       <section className={styles.commentContainer}>
