@@ -1,5 +1,5 @@
 import { connectDB } from "@/app/utils/datadbase";
-import { Post } from "@/types";
+import { DmRoom, Post } from "@/types";
 import { ObjectId } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -12,7 +12,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const result = await db.collection<Post>('post').findOne({_id: new ObjectId(req.query._id)});
 
       res.status(200).json(result);
-    } else {
+    } 
+    
+    else if (req.method === 'PUT') {
+      const result = await db.collection<Post>('post').updateOne({
+        _id: new ObjectId(req.query.id as string),
+      }, {
+        $inc: { likes: parseInt(req.query.count as string) },
+      });
+
+      res.status(200).json(result);
+    }
+    
+    else {
       res.status(400).json({ message: 'Post not found' });
     }
 

@@ -1,0 +1,18 @@
+.heartButton {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.heartIcon {
+  margin-right: 5px;
+  color: var(--dark-grey-color);
+}
+
+.activeHeartIcon {
+  color: var(--deep-mint-color); 
+}
+
+.heartIcon:hover {
+  color: var(--deep-mint-color); 
+}

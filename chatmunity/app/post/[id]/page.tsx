@@ -7,6 +7,9 @@ import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import CommentInput from '@/components/ui/CommentInput';
 import Comment from '@/components/ui/Comment';
 import PostHeader from '@/components/ui/PostHeader';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import HeartButton from '@/components/ui/HeartButton';
 
 interface Props {
   params: { id: string },
@@ -26,7 +29,11 @@ export default async function PostDetail(props: Props) {
       <PostHeader postData={postData} />
       <h3 className={styles.title}>{postData?.title}</h3>
       <p className={styles.content}>{postData?.content}</p>
-      <div className={styles.commentContainer}>
+      <section className={styles.heartContainer}>
+        <HeartButton postData={postData as Post} />
+      </section>
+
+      <section className={styles.commentContainer}>
         <CommentInput session={session} postId={props.params.id} />
         { 
           commentList.map((item, idx) => {
@@ -35,7 +42,7 @@ export default async function PostDetail(props: Props) {
             );
           })
         }
-      </div>
+      </section>
     </div>
   );
 }
