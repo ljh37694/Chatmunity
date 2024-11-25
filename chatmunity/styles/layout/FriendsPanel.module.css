@@ -95,6 +95,7 @@
 
 .menu {
   position: absolute;
+  overflow: hidden;
   left: 3em;
   top: 7em;
   background-color: #fff;
