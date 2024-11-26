@@ -1,5 +1,6 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { ObjectId } from "mongodb";
+import { User } from "next-auth";
 
 export interface Chat {
   _id?: ObjectId | string,
@@ -24,10 +25,8 @@ export interface Post extends Chat {
 
 type UserStatus = 'online' | 'offline' | 'away';
 
-export interface UserData {
-  name: string,
-  email: string,
-  image: string,
+export interface UserData extends User {
+  _id: ObjectId | string,
   created_at: string,
   status: UserStatus,
 }

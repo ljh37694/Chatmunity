@@ -1,26 +1,27 @@
-.chat {
-  margin: 10px 0;
+.container {
   display: flex;
-  align-items: center;
-  justify-content: right;
+  padding: 10px 0px;
+  max-width: 60%;
+  justify-self: flex-end;
 }
 
-.content {
+.otherChatContainer {
+  justify-self: flex-start;
+}
+
+.chat {
   font-family: 'Paperlogy-5Medium';
   background-color: #eee;
   padding: 10px;
-  height: 100%;
   display: inline-block;
   border-radius: 10px;
-  max-width: 60%;
+  margin-top: 8px;
+  margin-left: 4px;
 }
 
 .otherChat {
   justify-content: left;
-
-  & > * {
-    background-color: aqua;
-  }
+  background-color: aqua;
 }
 
 .url {
@@ -30,4 +31,26 @@
 
 .highlight {
   background-color: yellow;
+}
+
+.profile {
+  display: flex;
+  justify-content: center;
+}
+
+.profileImage {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: inherit;
+}
+
+.chatContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  margin-top: 5px;
+  margin-left: 5px;
 }

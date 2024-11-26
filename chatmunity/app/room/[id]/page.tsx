@@ -1,4 +1,3 @@
-import PostRoom from "@/components/ui/PostRoom";
 import styles from "./page.module.css";
 import { connectDB } from "@/app/utils/datadbase";
 import { Chat, Post, PostRoomType } from "@/types";
@@ -6,6 +5,8 @@ import ChattingRoom from "@/components/common/ChattingRoom";
 import ChattingList from "@/components/common/ChattingList";
 import PostInput from "@/components/ui/PostInput";
 import Chatting from "@/components/ui/Chatting";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { getServerSession } from "next-auth";
 
 interface Props {
   params: {
@@ -16,6 +17,8 @@ interface Props {
 export default async function RoomDetail(props: Props) {
   const client = await connectDB;
   const db = client.db('Chatmunity');
+
+  const session = await getServerSession(authOptions);
 
   const posts = await db.collection<Post>('post').find({
     room_id: props.params.id,
@@ -37,9 +40,9 @@ export default async function RoomDetail(props: Props) {
     <ChattingRoom title={roomData?.title as string} className={styles.container}>
       <ChattingList inputComp={<PostInput roomId={props.params.id} />}>
         {
-          postList.map((item, idx) => {
+          postList.map((item) => {
             return (
-              <Chatting chatData={item} isOtherChat={idx % 2 === 0} url={`/post/${item._id}`} key={item._id as string} />
+              <Chatting chatData={item} isOtherChat={item.writer !== session?.user?.email} url={`/post/${item._id}`} key={item._id as string} />
             );
           })
         }
