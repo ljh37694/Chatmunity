@@ -6,6 +6,7 @@ import styles from '@/styles/layout/FriendsPanel.module.css';
 import axios from 'axios';
 import { Session } from 'next-auth';
 import { useRouter } from 'next/navigation';
+import { socket } from '@/socket';
 
 interface Menu {
   name: string;
@@ -43,6 +44,23 @@ export default function FriendItem(props: { data: Profile, friendData: UserData,
 
     return () => document.removeEventListener('mousedown', onMouseDown);
   }, [showMenu]);
+
+  useEffect(() => {
+    socket.on('userStatus', (userId: string, status: string) => {
+      if (userId === friendData.email) {
+        setStatus(statusList.indexOf(status));
+      }
+    });
+
+    axios.get('/api/userStatus?email=' + friendData.email)
+      .then((res) => {
+        setStatus(statusList.indexOf(res.data));
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const menuList: Menu[] = [
     {

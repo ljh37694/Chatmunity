@@ -4,6 +4,7 @@ import styles from '@/styles/layout/FriendsPanel.module.css';
 import { Friend, Profile, UserData } from '@/types';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { getServerSession } from 'next-auth';
+import UserStatus from './UserStatus';
 
 export default async function FriendsPanel() {
   const client = await connectDB;
@@ -23,8 +24,8 @@ export default async function FriendsPanel() {
 
   // 친구 프로필 리스트 생성
   const profileList: Profile[] = friendList.map((item) => ({
-    name: item.name,
-    img: item.image,
+    name: item.name as string,
+    img: item.image as string,
   }));
 
   await db.collection<UserData>('user').updateOne({
@@ -43,6 +44,8 @@ export default async function FriendsPanel() {
           );
         })}
       </section>
+      
+      <UserStatus session={session} />
     </div>
   );
 }
