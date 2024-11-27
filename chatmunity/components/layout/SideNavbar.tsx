@@ -20,7 +20,7 @@ export default function SideNavbar() {
     { text: 'Home', icon: faHome, url: '/room'},
     { text: 'Hot', icon: faFire, url: '/hot' },
     { text: 'DM', icon: faMessage, url: '/dm'},
-    { text: 'MyPage', icon: faUser, url: '/mypage'},
+    { text: 'My', icon: faUser, url: '/mypage'},
   ];
 
   const [activeMenu, setActiveMenu] = useState<number>(-1);
