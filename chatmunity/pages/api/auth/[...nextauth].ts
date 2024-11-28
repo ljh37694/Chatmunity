@@ -25,11 +25,13 @@ export const authOptions: NextAuthOptions = {
       
       if (!userData) {
         await db.collection<UserData>('user').insertOne({
+          _id: user?.id as string,
           name: user?.name as string,
           image: user?.image as string,
           email: user?.email as string,
           created_at: (new Date()).toString(),
           status: 'offline',
+          id: user?.email as string,
         });
       }
 

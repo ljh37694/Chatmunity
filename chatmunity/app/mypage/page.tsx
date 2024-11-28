@@ -9,12 +9,22 @@ export default async function MyPage() {
 
   return (
     <div className={styles.container}>
-      <p className={styles.info}>이름: {session?.user?.name}</p>
-      <p className={styles.info}>이메일: {session?.user?.email}</p>
+      <h1 className={styles.title}>마이페이지</h1>
 
-      {
-        session?.user ? <LogoutButton /> : <LoginButton />
-      }
+      <section className={styles.userContainer}>
+        <img src={session?.user?.image as string} alt="프로필 이미지" className={styles.profile} />
+
+        <div className={styles.infoContainer}>
+          <p className={`${styles.info} ${styles.name}`}>{session?.user?.name}</p>
+          <p className={`${styles.info} ${styles.email}`}>{session?.user?.email}</p>
+        </div>
+      </section>
+
+      <div className={styles.buttonContainer}>
+        {
+          session?.user ? <LogoutButton /> : <LoginButton />
+        }
+      </div>
     </div>
   )
 }
