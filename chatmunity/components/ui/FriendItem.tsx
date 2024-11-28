@@ -54,8 +54,7 @@ export default function FriendItem(props: { data: Profile, friendData: UserData,
 
     axios.get('/api/userStatus?email=' + friendData.email)
       .then((res) => {
-        setStatus(statusList.indexOf(res.data));
-        console.log(res.data);
+        setStatus(statusList.indexOf(res.data.status));
       })
       .catch((err) => {
         console.log(err);

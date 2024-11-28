@@ -69,7 +69,7 @@
 }
 
 .offline {
-  background-color: #fff;
+  background-color: var(--grey-color);
 }
 
 .away {

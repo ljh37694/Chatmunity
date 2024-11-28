@@ -13,8 +13,9 @@ const port = 3000;
 const app = next({ dev, hostname, port });
 const handler = app.getRequestHandler();
 
+const userList = new Map([]);
+
 const client = createClient({
-  legacyMode: true,
   url: `redis://${process.env.REDIS_USERNAME}:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT}/0`
 });
 
@@ -39,11 +40,26 @@ app.prepare().then(() => {
       io.to(roomId).emit('message', message);
     });
 
+    // 유저 온라인/오프라인 상태 업데이트
     socket.on('userStatus', async (userId, status) => {
-      await client.set(userId, status);
+      const userData = {
+        userId: userId,
+        socketId: socket.id,
+        status: status,
+      };
+
+      const result = await client.set(socket.id, JSON.stringify(userData));
+
       io.emit('userStatus', userId, status);
 
+      if (status === 'online') {
+        userList.set(userId, userData);
+      } else {
+        userList.delete(userId);
+      }
+
       console.log('userStatus: ' + userId + ' ' + status);
+      console.log(result);
     });
 
     socket.on('joinRoom', (roomId) => {
@@ -52,9 +68,15 @@ app.prepare().then(() => {
     });
 
     socket.on('disconnect', async () => {
-      await client.del(socket.auth.userId);
-      io.emit('userStatus', socket.auth.userId, 'offline');
-      console.log('user disconnected');
+      const userData = JSON.parse(await client.get(socket.id));
+
+      await client.del(socket.id);
+      io.emit('userStatus', userData.userId, 'offline');
+      userList.delete(userData.userId);
+
+      console.log(userList);
+
+      console.log('user disconnected: ' + userData.userId);
     });
   });
 
@@ -69,3 +91,4 @@ app.prepare().then(() => {
 });
 
 global.redisClient = client;
+global.userList = userList;

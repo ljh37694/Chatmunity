@@ -70,3 +70,9 @@ export interface Friend {
   user_id: string,
   friend_id: string,
 }
+
+export interface UserSocketData {
+  userId: string,
+  socketId: string,
+  status: UserStatus,
+}

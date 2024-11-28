@@ -1,7 +1,7 @@
 import { connectDB } from "@/app/utils/datadbase";
+import { UserData } from "@/types";
 import { Db, MongoClient } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
-import { User } from "next-auth";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const db: Db = client.db('Chatmunity');
 
     if (req.method === "GET") {
-      const result = await db.collection<User>('user').findOne({email: req.query.email});
+      const result = await db.collection<UserData>('user').findOne({ email: req.query.email });
 
       res.status(200).json(result);
     }
