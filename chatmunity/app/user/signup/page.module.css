@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 100px 0 30px;
+}
+
+.input {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+}
+
+.input:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.passwordError {
+  border: 1px solid red;
+}
+
+.passwordErrorText {
+  color: red;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.passwordSuccess {
+  border: 2px solid green;
+}

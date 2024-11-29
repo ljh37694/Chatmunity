@@ -41,7 +41,7 @@
 }
 
 :root {
-  --border-color: rgba(0, 0, 0, 0.1);
+  --border-color: rgba(0, 0, 0, 0.2);
   --mint-color: #c9ffe5;
   --deep-mint-color: #93e1c2;
   --grey-color: rgb(205, 205, 205);
