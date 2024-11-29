@@ -21,16 +21,16 @@
   margin-bottom: 10px;
 }
 
-.passwordError {
+.error {
   border: 1px solid red;
 }
 
-.passwordErrorText {
+.success {
+  border: 2px solid green;
+}
+
+.errorText {
   color: red;
   margin-bottom: 10px;
   text-align: center;
-}
-
-.passwordSuccess {
-  border: 2px solid green;
 }

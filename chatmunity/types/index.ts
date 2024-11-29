@@ -26,7 +26,7 @@ export interface Post extends Chat {
 type UserStatus = 'online' | 'offline' | 'away';
 
 export interface UserData extends User {
-  _id: ObjectId | string,
+  _id?: ObjectId | string,
   password?: string,
   created_at: string,
   status: UserStatus,

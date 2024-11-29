@@ -10,7 +10,7 @@ export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
-      name: 'Credentials',
+      name: 'credentials',
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
@@ -21,13 +21,18 @@ export const authOptions: NextAuthOptions = {
 
         const user = await db.collection<UserData>('user').findOne({ email: credentials?.email as string });
 
-        if (!user) return null;
+        if (!user) {
+          throw new Error("존재하지 않는 이메일입니다.");
+        }
+
+        else if (!user?.password) {
+          throw new Error("OAuth로 가입된 이메일입니다. OAuth 로그인을 사용하세요.");
+        };
 
         const isPasswordValid = await bcrypt.compare(credentials?.password as string, user.password as string);
 
         if (!isPasswordValid) {
-          console.log('비밀번호가 일치하지 않습니다.');
-          return null;
+          throw new Error("비밀번호가 일치하지 않습니다.");
         }
 
         return user;

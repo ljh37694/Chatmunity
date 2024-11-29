@@ -2,6 +2,7 @@ import { connectDB } from "@/app/utils/datadbase";
 import { UserData } from "@/types";
 import { Db, MongoClient } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
+import bcrypt from 'bcrypt';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
