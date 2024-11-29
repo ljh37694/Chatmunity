@@ -5,7 +5,6 @@ import styles from './page.module.css';
 import { useRef, useState } from 'react';
 import axios from 'axios';
 import { UserData } from '@/types';
-import { useRouter } from 'next/navigation';
 
 type Status = 'normal' | 'success' | 'error';
 
@@ -19,8 +18,6 @@ export default function Signup() {
   const [emailStatus, setEmailStatus] = useState<Status>('normal');
   const [passwordStatus, setPasswordStatus] = useState<Status>('normal');
   const [confirmPasswordStatus, setConfirmPasswordStatus] = useState<Status>('normal');
-
-  const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -53,7 +50,7 @@ export default function Signup() {
 
       axios.post<UserData>('/api/auth/signup', userData).then((res) => {
         console.log(res);
-        
+
         alert('회원가입이 완료되었습니다.');
       }).catch((e) => {
         alert(e.response.data.message);

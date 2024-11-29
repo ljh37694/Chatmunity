@@ -72,6 +72,13 @@ export const authOptions: NextAuthOptions = {
 
       return true;
     },
+    async redirect({ url, baseUrl }) {
+      if (url.startsWith("/user")) {
+        return baseUrl;
+      }
+
+      return url;
+    },
   },
   secret: process.env.JWT_SECRET,
 }

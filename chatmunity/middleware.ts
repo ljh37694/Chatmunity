@@ -1,35 +1,30 @@
 import { getToken } from "next-auth/jwt";
-import { signIn } from "next-auth/react";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(req: NextRequest) {
   const curUrl = req.nextUrl.pathname;
 
-  if (curUrl.startsWith('/write') || curUrl.startsWith('/mypage')) {
+  if (curUrl.startsWith('/write') || curUrl.startsWith('/mypage') || curUrl.startsWith('/dm')) {
     const token = await getToken({ req, secret: process.env.JWT_SECRET });
 
     if (token === null) {
-      return NextResponse.redirect(new URL('/api/auth/signin', req.url));
+      return NextResponse.redirect(new URL('/user/signin', req.url));
     }
   
     else {
-      console.log(token);
-
       return NextResponse.next();
     }
-  } 
-  
-  else if (curUrl.startsWith('/dm')) {
+  }
+
+  else if (curUrl.startsWith('/user')) {
     const token = await getToken({ req, secret: process.env.JWT_SECRET });
 
     if (token === null) {
-      return NextResponse.redirect(new URL('/api/auth/signin', req.url));
+      return NextResponse.next();
     }
 
     else {
-      console.log(token);
-
-      return NextResponse.next();
+      return NextResponse.redirect(new URL('/', req.url));
     }
   }
 }
